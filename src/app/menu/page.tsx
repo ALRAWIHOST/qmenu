@@ -3,6 +3,8 @@ import AddCategoryForm from "./AddCategoryForm";
 import AddProductForm from "./AddProductForm";
 import EditProductForm from "./EditProductForm";
 import DeleteProductButton from "./DeleteProductButton";
+import DeleteCategoryButton from "./DeleteCategoryButton";
+import EditCategoryForm from "./EditCategoryForm";
 
 export default async function MenuPage() {
   const { data: restaurants } = await supabase
@@ -45,9 +47,23 @@ export default async function MenuPage() {
 
             <ul className="space-y-2">
               {categories?.map((category) => (
-                <li key={category.id} className="border p-3 rounded-lg">
-                  {category.name}
-                </li>
+                <li
+  key={category.id}
+  className="border p-3 rounded-lg flex justify-between items-center"
+>
+  <span>{category.name}</span>
+
+  <div className="flex gap-2">
+    <EditCategoryForm
+      categoryId={category.id}
+      currentName={category.name}
+    />
+
+    <DeleteCategoryButton
+      categoryId={category.id}
+    />
+  </div>
+</li>
               ))}
             </ul>
           </div>
