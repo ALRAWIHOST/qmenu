@@ -63,15 +63,15 @@ export default async function PublicMenuPage({
             <img
               src={restaurant.logo_url}
               alt={restaurant.name}
-              className="mx-auto -mt-24 mb-6 h-40 w-40 rounded-3xl border-8 border-white object-cover shadow-2xl bg-white"
+              className="mx-auto -mt-16 mb-5 h-28 w-28 md:h-32 md:w-32 rounded-3xl border-4 border-white object-cover shadow-xl bg-white"
             />
           )}
 
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight break-words">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight break-words">
             {restaurant.name}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-gray-600">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600">
             {restaurant.address && <span>📍 {restaurant.address}</span>}
             {restaurant.phone && <span>☎ {restaurant.phone}</span>}
           </div>
@@ -79,11 +79,11 @@ export default async function PublicMenuPage({
       </header>
 
       <nav className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-5xl mx-auto px-6 overflow-x-auto">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 overflow-x-auto">
           <div className="flex gap-3 py-4">
             <a
               href="#all"
-              className="whitespace-nowrap rounded-full bg-black px-5 py-2 text-sm font-semibold text-white"
+              className="whitespace-nowrap rounded-full bg-black px-4 py-2 text-xs font-semibold text-white"
             >
               Alle
             </a>
@@ -92,7 +92,7 @@ export default async function PublicMenuPage({
               <a
                 key={category.id}
                 href={`#${category.id}`}
-                className="whitespace-nowrap rounded-full border px-5 py-2 text-sm font-semibold hover:bg-gray-100"
+                className="whitespace-nowrap rounded-full border px-4 py-2 text-xs font-semibold hover:bg-gray-100"
               >
                 {category.name}
               </a>
@@ -130,10 +130,10 @@ export default async function PublicMenuPage({
                         <img
                           src={product.image_url}
                           alt={product.name}
-                          className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl object-cover"
+                          className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl object-cover"
                         />
                       ) : (
-                        <div className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl bg-gray-100" />
+                        <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-gray-100" />
                       )}
 
                       <div className="flex min-w-0 flex-1 flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -149,7 +149,7 @@ export default async function PublicMenuPage({
                           )}
                         </div>
 
-                        <span className="self-start md:self-auto whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-lg font-bold text-emerald-700">
+                        <span className="self-start md:self-auto whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-base font-bold text-emerald-700">
                           {product.price}€
                         </span>
                       </div>
