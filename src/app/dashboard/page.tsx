@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import UpgradePlanButton from "./UpgradePlanButton";
 
 type Restaurant = {
   id: string;
@@ -72,15 +73,38 @@ export default function DashboardPage() {
                 {restaurant.name}
               </h3>
 
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-sm text-gray-600">
-                  Plan:
-                </span>
+              <div className="space-y-3 mb-4">
+  <div className="flex items-center gap-2">
+    <span className="text-sm text-gray-600">
+      Plan:
+    </span>
 
-                <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
-                  {restaurant.plan || "free"}
-                </span>
-              </div>
+    <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
+      {restaurant.plan || "free"}
+    </span>
+  </div>
+
+  {restaurant.plan === "free" && (
+    <div className="flex gap-2">
+      <UpgradePlanButton
+        restaurantId={restaurant.id}
+        newPlan="basic"
+      />
+
+      <UpgradePlanButton
+        restaurantId={restaurant.id}
+        newPlan="pro"
+      />
+    </div>
+  )}
+
+  {restaurant.plan === "basic" && (
+    <UpgradePlanButton
+      restaurantId={restaurant.id}
+      newPlan="pro"
+    />
+  )}
+</div>
 
               <p className="text-gray-600 mb-4">
                 /s/{restaurant.slug}
