@@ -10,9 +10,16 @@ export default function QRPage() {
 
   useEffect(() => {
     const generateQR = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
       const { data: restaurants } = await supabase
         .from("restaurants")
         .select("*")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false })
         .limit(1);
 
@@ -20,7 +27,11 @@ export default function QRPage() {
 
       if (!restaurant) return;
 
-      const url = `${window.location.origin}/s/${restaurant.slug}`;
+      await supabase.from("qr_scans").insert({
+        restaurant_id: restaurant.id,
+      });
+
+      const url = `${window.location.origin}/scan/${restaurant.slug}`;
       setMenuUrl(url);
 
       const qr = await QRCode.toDataURL(url, {

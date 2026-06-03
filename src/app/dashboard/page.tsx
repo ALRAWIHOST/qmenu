@@ -12,6 +12,7 @@ type Restaurant = {
   slug: string;
   plan?: string;
   menuViews?: number;
+  qrScans?: number;
 };
 
 export default function DashboardPage() {
@@ -35,21 +36,27 @@ export default function DashboardPage() {
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
-      const restaurantsWithViews = await Promise.all(
+      const restaurantsWithStats = await Promise.all(
         (restaurantData || []).map(async (restaurant) => {
-          const { count } = await supabase
+          const { count: menuViews } = await supabase
             .from("menu_views")
+            .select("*", { count: "exact", head: true })
+            .eq("restaurant_id", restaurant.id);
+
+          const { count: qrScans } = await supabase
+            .from("qr_scans")
             .select("*", { count: "exact", head: true })
             .eq("restaurant_id", restaurant.id);
 
           return {
             ...restaurant,
-            menuViews: count || 0,
+            menuViews: menuViews || 0,
+            qrScans: qrScans || 0,
           };
         })
       );
 
-      setRestaurants(restaurantsWithViews);
+      setRestaurants(restaurantsWithStats);
     };
 
     loadData();
@@ -98,11 +105,20 @@ export default function DashboardPage() {
                     </span>
                   </div>
 
-                  <div className="text-sm text-gray-600">
-                    Menu Views:{" "}
-                    <span className="font-semibold text-gray-900">
-                      {restaurant.menuViews || 0}
-                    </span>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl border p-3">
+                      <p className="text-xs text-gray-500">QR Scans</p>
+                      <p className="text-2xl font-bold">
+                        {restaurant.qrScans || 0}
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl border p-3">
+                      <p className="text-xs text-gray-500">Menu Views</p>
+                      <p className="text-2xl font-bold">
+                        {restaurant.menuViews || 0}
+                      </p>
+                    </div>
                   </div>
 
                   {plan === "free" && (
