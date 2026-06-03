@@ -3,14 +3,11 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
-      <header className="flex items-center justify-between px-8 py-5 border-b">
+      <header className="flex items-center justify-between px-6 md:px-8 py-5 border-b">
         <h1 className="text-2xl font-bold">QMenu</h1>
 
         <nav className="flex items-center gap-4">
-          <Link
-            href="/login"
-            className="text-gray-700 hover:text-black"
-          >
+          <Link href="/login" className="text-gray-700 hover:text-black">
             Login
           </Link>
 
@@ -23,76 +20,78 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="flex flex-col items-center justify-center text-center px-6 py-28">
-        <span className="mb-5 rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-600">
-          Für Restaurants, Cafés und Food Trucks
+      <section className="px-6 py-24 md:py-32 text-center bg-gradient-to-b from-gray-50 to-white">
+        <span className="mb-5 inline-block rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-600">
+          Digitale QR-Speisekarte für Restaurants
         </span>
 
-        <h2 className="text-6xl font-bold mb-6">QMenu</h2>
+        <h2 className="text-5xl md:text-7xl font-extrabold mb-6">
+          Ihr Menü. Digital. Schnell. Modern.
+        </h2>
 
-        <p className="text-2xl text-gray-600 max-w-3xl mb-8">
-          Digitale Speisekarte für Restaurants und Cafés. Erstellen Sie Ihre
-          Speisekarte in wenigen Minuten und teilen Sie sie per QR-Code.
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          Erstellen Sie eine professionelle digitale Speisekarte mit QR-Code,
+          Logo, Cover-Bild, Öffnungszeiten, Social Links und Statistiken.
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             href="/register"
-            className="bg-black text-white px-6 py-3 rounded-lg text-lg"
+            className="bg-black text-white px-8 py-4 rounded-xl text-lg font-semibold"
           >
             Jetzt starten
           </Link>
 
           <Link
             href="/s/qmenu-demo"
-            className="border border-black px-6 py-3 rounded-lg text-lg"
+            className="border border-black px-8 py-4 rounded-xl text-lg font-semibold"
           >
             Demo ansehen
           </Link>
         </div>
-
-        <div className="mt-10 text-gray-500 text-sm">
-          DE Deutsch | EN English | AR العربية
-        </div>
       </section>
 
-      <section className="py-24 px-8 bg-gray-50">
+      <section className="py-24 px-6 md:px-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Funktionen</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">
+            Alles für Ihr digitales Menü
+          </h2>
 
           <p className="text-center text-gray-600 mb-12">
-            Alles, was Sie brauchen, um Ihre Speisekarte online zu verwalten.
+            QMenu bietet alles, was Restaurants brauchen, um ihre Speisekarte
+            online zu verwalten und per QR-Code zu teilen.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-2xl shadow-sm border">
-              <h3 className="text-xl font-semibold mb-3">QR-Code</h3>
+              <h3 className="text-xl font-semibold mb-3">QR-Code Menü</h3>
               <p className="text-gray-600">
-                Erstellen Sie automatisch einen QR-Code für Ihre Speisekarte.
+                Erstellen Sie automatisch einen QR-Code für Ihre digitale
+                Speisekarte und teilen Sie ihn mit Ihren Gästen.
               </p>
             </div>
 
             <div className="bg-white p-8 rounded-2xl shadow-sm border">
               <h3 className="text-xl font-semibold mb-3">
-                Digitale Speisekarte
+                Restaurant Branding
               </h3>
               <p className="text-gray-600">
-                Verwalten Sie Kategorien, Produkte, Preise und Bilder einfach
-                online.
+                Logo, Cover-Bild, Öffnungszeiten und Social-Media-Links für
+                einen professionellen Auftritt.
               </p>
             </div>
 
             <div className="bg-white p-8 rounded-2xl shadow-sm border">
-              <h3 className="text-xl font-semibold mb-3">Mehrsprachig</h3>
+              <h3 className="text-xl font-semibold mb-3">Statistiken</h3>
               <p className="text-gray-600">
-                Unterstützt Deutsch, Englisch und Arabisch für Ihre Kunden.
+                Verfolgen Sie Menü-Aufrufe und QR-Scans direkt im Dashboard.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-8">
+      <section className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">Preise</h2>
 
@@ -105,10 +104,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Free</h3>
               <p className="text-gray-600 mb-6">Für den Start</p>
               <p className="text-4xl font-bold mb-6">0€</p>
+
               <ul className="space-y-3 text-gray-600 mb-8">
-                <li>Bis zu 10 Produkte</li>
+                <li>Bis zu 5 Produkte</li>
                 <li>QR-Code inklusive</li>
-                <li>1 Sprache</li>
+                <li>Basis-Menü</li>
               </ul>
 
               <Link
@@ -123,10 +123,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Basic</h3>
               <p className="text-gray-600 mb-6">Für kleine Restaurants</p>
               <p className="text-4xl font-bold mb-6">9€</p>
+
               <ul className="space-y-3 text-gray-600 mb-8">
-                <li>Bis zu 100 Produkte</li>
-                <li>Bilder für Produkte</li>
-                <li>Deutsch + Englisch</li>
+                <li>Bis zu 50 Produkte</li>
+                <li>Logo & Cover-Bild</li>
+                <li>Social Links</li>
               </ul>
 
               <Link
@@ -141,10 +142,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Pro</h3>
               <p className="text-gray-600 mb-6">Für Profis</p>
               <p className="text-4xl font-bold mb-6">19€</p>
+
               <ul className="space-y-3 text-gray-600 mb-8">
                 <li>Unbegrenzte Produkte</li>
-                <li>3 Sprachen</li>
-                <li>Statistiken und Support</li>
+                <li>QR-Scan Statistiken</li>
+                <li>Priorisierter Support</li>
               </ul>
 
               <Link
@@ -155,6 +157,26 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 md:px-8 bg-black text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Bereit für Ihr digitales Menü?
+          </h2>
+
+          <p className="text-lg text-gray-300 mb-8">
+            Erstellen Sie Ihre Speisekarte in wenigen Minuten und teilen Sie
+            sie sofort per QR-Code mit Ihren Gästen.
+          </p>
+
+          <Link
+            href="/register"
+            className="inline-block bg-white text-black px-8 py-4 rounded-xl font-semibold"
+          >
+            Jetzt kostenlos starten
+          </Link>
         </div>
       </section>
 
