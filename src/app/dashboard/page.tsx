@@ -9,6 +9,7 @@ type Restaurant = {
   id: string;
   name: string;
   slug: string;
+  plan?: string;
 };
 
 export default function DashboardPage() {
@@ -57,14 +58,33 @@ export default function DashboardPage() {
       </header>
 
       <section className="p-8">
-        <h2 className="text-3xl font-bold mb-6">Meine Restaurants</h2>
+        <h2 className="text-3xl font-bold mb-6">
+          Meine Restaurants
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           {restaurants.map((restaurant) => (
-            <div key={restaurant.id} className="bg-white border rounded-2xl p-6">
-              <h3 className="text-xl font-semibold mb-2">{restaurant.name}</h3>
+            <div
+              key={restaurant.id}
+              className="bg-white border rounded-2xl p-6"
+            >
+              <h3 className="text-xl font-semibold mb-2">
+                {restaurant.name}
+              </h3>
 
-              <p className="text-gray-600 mb-4">/s/{restaurant.slug}</p>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-sm text-gray-600">
+                  Plan:
+                </span>
+
+                <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
+                  {restaurant.plan || "free"}
+                </span>
+              </div>
+
+              <p className="text-gray-600 mb-4">
+                /s/{restaurant.slug}
+              </p>
 
               <div className="flex flex-wrap gap-2">
                 <Link
@@ -74,7 +94,10 @@ export default function DashboardPage() {
                   Menü bearbeiten
                 </Link>
 
-                <Link href="/qr" className="border px-4 py-2 rounded-lg">
+                <Link
+                  href="/qr"
+                  className="border px-4 py-2 rounded-lg"
+                >
                   QR
                 </Link>
 
