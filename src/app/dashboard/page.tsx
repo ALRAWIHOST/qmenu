@@ -11,6 +11,7 @@ type Restaurant = {
   name: string;
   slug: string;
   plan?: string;
+  menuViews?: number;
 };
 
 export default function DashboardPage() {
@@ -28,13 +29,27 @@ export default function DashboardPage() {
         return;
       }
 
-      const { data } = await supabase
+      const { data: restaurantData } = await supabase
         .from("restaurants")
         .select("*")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
-      setRestaurants(data || []);
+      const restaurantsWithViews = await Promise.all(
+        (restaurantData || []).map(async (restaurant) => {
+          const { count } = await supabase
+            .from("menu_views")
+            .select("*", { count: "exact", head: true })
+            .eq("restaurant_id", restaurant.id);
+
+          return {
+            ...restaurant,
+            menuViews: count || 0,
+          };
+        })
+      );
+
+      setRestaurants(restaurantsWithViews);
     };
 
     loadData();
@@ -59,9 +74,7 @@ export default function DashboardPage() {
       </header>
 
       <section className="p-8">
-        <h2 className="text-3xl font-bold mb-6">
-          Meine Restaurants
-        </h2>
+        <h2 className="text-3xl font-bold mb-6">Meine Restaurants</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           {restaurants.map((restaurant) => {
@@ -78,12 +91,17 @@ export default function DashboardPage() {
 
                 <div className="space-y-3 mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-600">
-                      Plan:
-                    </span>
+                    <span className="text-sm text-gray-600">Plan:</span>
 
                     <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
                       {plan}
+                    </span>
+                  </div>
+
+                  <div className="text-sm text-gray-600">
+                    Menu Views:{" "}
+                    <span className="font-semibold text-gray-900">
+                      {restaurant.menuViews || 0}
                     </span>
                   </div>
 
@@ -109,9 +127,7 @@ export default function DashboardPage() {
                   )}
                 </div>
 
-                <p className="text-gray-600 mb-4">
-                  /s/{restaurant.slug}
-                </p>
+                <p className="text-gray-600 mb-4">/s/{restaurant.slug}</p>
 
                 <div className="flex flex-wrap gap-2">
                   <Link
@@ -121,10 +137,7 @@ export default function DashboardPage() {
                     Menü bearbeiten
                   </Link>
 
-                  <Link
-                    href="/qr"
-                    className="border px-4 py-2 rounded-lg"
-                  >
+                  <Link href="/qr" className="border px-4 py-2 rounded-lg">
                     QR
                   </Link>
 

@@ -17,18 +17,6 @@ export default async function PublicMenuPage({
     .eq("slug", slug)
     .single();
 
-  const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("restaurant_id", restaurant?.id || "")
-    .order("created_at", { ascending: true });
-
-  const { data: products } = await supabase
-    .from("products")
-    .select("*")
-    .eq("restaurant_id", restaurant?.id || "")
-    .order("created_at", { ascending: true });
-
   if (!restaurant) {
     return (
       <main className="min-h-screen flex items-center justify-center">
@@ -36,6 +24,22 @@ export default async function PublicMenuPage({
       </main>
     );
   }
+
+  await supabase.from("menu_views").insert({
+    restaurant_id: restaurant.id,
+  });
+
+  const { data: categories } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("restaurant_id", restaurant.id)
+    .order("created_at", { ascending: true });
+
+  const { data: products } = await supabase
+    .from("products")
+    .select("*")
+    .eq("restaurant_id", restaurant.id)
+    .order("created_at", { ascending: true });
 
   return (
     <main className="min-h-screen bg-gray-50">
