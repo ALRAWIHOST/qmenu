@@ -19,7 +19,7 @@ export default async function PublicMenuPage({
 
   if (!restaurant) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center bg-gray-50">
         <h1 className="text-3xl font-bold">Restaurant nicht gefunden</h1>
       </main>
     );
@@ -42,57 +42,133 @@ export default async function PublicMenuPage({
     .order("created_at", { ascending: true });
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b px-6 py-8 text-center">
-        <h1 className="text-4xl font-bold">{restaurant.name}</h1>
-        <p className="text-gray-500 mt-2">{restaurant.address}</p>
+    <main className="min-h-screen bg-[#f7f7f5] text-gray-900">
+      <header className="bg-white border-b">
+        <div className="relative">
+          {restaurant.cover_url ? (
+            <img
+              src={restaurant.cover_url}
+              alt="Cover"
+              className="h-72 w-full object-cover"
+            />
+          ) : (
+            <div className="h-72 w-full bg-gradient-to-r from-gray-900 to-gray-700" />
+          )}
+
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-6 pb-10 text-center">
+          {restaurant.logo_url && (
+            <img
+              src={restaurant.logo_url}
+              alt={restaurant.name}
+              className="mx-auto -mt-24 mb-6 h-40 w-40 rounded-3xl border-8 border-white object-cover shadow-2xl bg-white"
+            />
+          )}
+
+          <h1 className="text-5xl font-extrabold tracking-tight">
+            {restaurant.name}
+          </h1>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-gray-600">
+            {restaurant.address && (
+              <span>📍 {restaurant.address}</span>
+            )}
+
+            {restaurant.phone && (
+              <span>☎ {restaurant.phone}</span>
+            )}
+          </div>
+        </div>
       </header>
 
-      <section className="max-w-3xl mx-auto p-6">
-        {categories?.map((category) => (
-          <div key={category.id} className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
+      <nav className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b">
+        <div className="max-w-5xl mx-auto px-6 overflow-x-auto">
+          <div className="flex gap-3 py-4">
+            <a
+              href="#all"
+              className="whitespace-nowrap rounded-full bg-black px-5 py-2 text-sm font-semibold text-white"
+            >
+              Alle
+            </a>
 
-            <div className="space-y-4">
-              {products
-                ?.filter((product) => product.category_id === category.id)
-                .map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white border rounded-2xl p-4 flex gap-4"
-                  >
-                    {product.image_url && (
-                      <img
-                        src={product.image_url}
-                        alt={product.name}
-                        className="h-24 w-24 rounded-xl object-cover"
-                      />
-                    )}
+            {categories?.map((category) => (
+              <a
+                key={category.id}
+                href={`#${category.id}`}
+                className="whitespace-nowrap rounded-full border px-5 py-2 text-sm font-semibold hover:bg-gray-100"
+              >
+                {category.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
 
-                    <div className="flex-1">
-                      <div className="flex justify-between gap-4">
+      <section id="all" className="max-w-5xl mx-auto px-6 py-10">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold">
+            Unsere Speisekarte
+          </h2>
+          <div className="mt-3 h-1 w-16 rounded-full bg-black" />
+        </div>
+
+        <div className="space-y-12">
+          {categories?.map((category) => {
+            const categoryProducts =
+              products?.filter(
+                (product) => product.category_id === category.id
+              ) || [];
+
+            if (categoryProducts.length === 0) return null;
+
+            return (
+              <div key={category.id} id={category.id}>
+                <h3 className="mb-5 text-2xl font-bold">
+                  {category.name}
+                </h3>
+
+                <div className="space-y-4">
+                  {categoryProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="group flex gap-4 rounded-3xl border bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      {product.image_url ? (
+                        <img
+                          src={product.image_url}
+                          alt={product.name}
+                          className="h-28 w-28 rounded-2xl object-cover"
+                        />
+                      ) : (
+                        <div className="h-28 w-28 rounded-2xl bg-gray-100" />
+                      )}
+
+                      <div className="flex flex-1 items-center justify-between gap-4">
                         <div>
-                          <h3 className="font-semibold text-lg">
+                          <h4 className="text-xl font-bold">
                             {product.name}
-                          </h3>
+                          </h4>
 
                           {product.description && (
-                            <p className="text-gray-500">
+                            <p className="mt-1 text-gray-500">
                               {product.description}
                             </p>
                           )}
                         </div>
 
-                        <span className="font-bold whitespace-nowrap">
+                        <span className="whitespace-nowrap text-xl font-extrabold text-emerald-700">
                           {product.price}€
                         </span>
                       </div>
                     </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        ))}
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </main>
   );

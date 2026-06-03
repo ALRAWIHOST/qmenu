@@ -5,6 +5,7 @@ import EditProductForm from "./EditProductForm";
 import DeleteProductButton from "./DeleteProductButton";
 import DeleteCategoryButton from "./DeleteCategoryButton";
 import EditCategoryForm from "./EditCategoryForm";
+import RestaurantBrandingForm from "./RestaurantBrandingForm";
 
 type MenuPageProps = {
   searchParams: Promise<{
@@ -59,6 +60,11 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
         <p className="text-gray-600 mb-8">
           Restaurant: {restaurant.name}
         </p>
+        <RestaurantBrandingForm
+  restaurantId={restaurant.id}
+  currentLogoUrl={restaurant.logo_url || ""}
+  currentCoverUrl={restaurant.cover_url || ""}
+/>
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white border rounded-2xl p-6">
