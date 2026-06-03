@@ -1,18 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const selectedPlan = searchParams.get("plan") || "free";
-
+  const [selectedPlan, setSelectedPlan] = useState("free");
   const [restaurantName, setRestaurantName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get("plan");
+
+    if (plan) {
+      setSelectedPlan(plan);
+    }
+  }, []);
 
   const createSlug = (name: string) => {
     return name
@@ -74,7 +81,9 @@ export default function RegisterPage() {
 
         <p className="text-center text-gray-600 mb-6">
           Gewählter Plan:{" "}
-          <span className="font-semibold uppercase">{selectedPlan}</span>
+          <span className="font-semibold uppercase">
+            {selectedPlan}
+          </span>
         </p>
 
         <input
