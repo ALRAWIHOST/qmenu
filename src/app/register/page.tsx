@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const selectedPlan = searchParams.get("plan") || "free";
 
   const [restaurantName, setRestaurantName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,11 +28,10 @@ export default function RegisterPage() {
       return;
     }
 
-    const { data: authData, error: authError } =
-      await supabase.auth.signUp({
-        email,
-        password,
-      });
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
     if (authError) {
       alert(authError.message);
@@ -64,11 +66,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md border rounded-2xl p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
+    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md bg-white border rounded-2xl p-8">
+        <h1 className="text-3xl font-bold mb-3 text-center">
           Registrieren
         </h1>
+
+        <p className="text-center text-gray-600 mb-6">
+          Gewählter Plan:{" "}
+          <span className="font-semibold uppercase">{selectedPlan}</span>
+        </p>
 
         <input
           type="text"
