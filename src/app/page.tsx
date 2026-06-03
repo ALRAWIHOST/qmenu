@@ -112,7 +112,7 @@ export default function Home() {
               </ul>
 
               <Link
-                href="/register"
+                href="/register?plan=free"
                 className="block w-full text-center border border-black py-3 rounded-lg"
               >
                 Kostenlos starten
@@ -130,7 +130,7 @@ export default function Home() {
               </ul>
 
               <Link
-                href="/register"
+                href="/register?plan=basic"
                 className="block w-full text-center bg-black text-white py-3 rounded-lg"
               >
                 Jetzt starten
@@ -148,7 +148,7 @@ export default function Home() {
               </ul>
 
               <Link
-                href="/register"
+                href="/register?plan=pro"
                 className="block w-full text-center border border-black py-3 rounded-lg"
               >
                 Pro wählen
