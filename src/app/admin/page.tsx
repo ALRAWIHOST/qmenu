@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import AdminPlanButton from "./AdminPlanButton";
 import DeleteRestaurantButton from "./DeleteRestaurantButton";
+import AdminLogoutButton from "./AdminLogoutButton";
 
 type Restaurant = {
   id: string;
@@ -22,6 +23,7 @@ export default function AdminPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [menuViews, setMenuViews] = useState(0);
   const [qrScans, setQrScans] = useState(0);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const loadAdminData = async () => {
@@ -98,10 +100,24 @@ export default function AdminPage() {
     (restaurant) => restaurant.plan === "pro"
   ).length;
 
+  const filteredRestaurants = restaurants.filter((restaurant) =>
+  restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
+  restaurant.slug.toLowerCase().includes(search.toLowerCase()) ||
+  (restaurant.plan || "free")
+    .toLowerCase()
+    .includes(search.toLowerCase())
+);
+
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">QMenu Admin</h1>
+        <div className="flex items-center justify-between mb-8">
+  <h1 className="text-4xl font-bold">
+    QMenu Admin
+  </h1>
+
+  <AdminLogoutButton />
+</div>
 
         <div className="grid md:grid-cols-6 gap-4 mb-8">
           <div className="bg-white border rounded-2xl p-5">
@@ -135,6 +151,15 @@ export default function AdminPage() {
           </div>
         </div>
 
+<div className="bg-white border rounded-2xl p-4 mb-4">
+  <input
+    type="text"
+    placeholder="Search restaurant..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    className="w-full border p-3 rounded-lg"
+  />
+</div>
         <div className="bg-white border rounded-2xl overflow-x-auto">
           <table className="w-full min-w-[700px]">
             <thead className="bg-gray-100">
@@ -148,7 +173,7 @@ export default function AdminPage() {
             </thead>
 
             <tbody>
-              {restaurants.map((restaurant) => (
+              {filteredRestaurants.map((restaurant) => (
                 <tr key={restaurant.id} className="border-t">
                   <td className="p-4">{restaurant.name}</td>
                   <td className="p-4 uppercase">{restaurant.plan || "free"}</td>
