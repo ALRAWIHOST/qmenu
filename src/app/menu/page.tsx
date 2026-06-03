@@ -6,6 +6,7 @@ import DeleteProductButton from "./DeleteProductButton";
 import DeleteCategoryButton from "./DeleteCategoryButton";
 import EditCategoryForm from "./EditCategoryForm";
 import RestaurantBrandingForm from "./RestaurantBrandingForm";
+import OpeningHoursForm from "./OpeningHoursForm";
 
 type MenuPageProps = {
   searchParams: Promise<{
@@ -60,6 +61,18 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
         <p className="text-gray-600 mb-8">
           Restaurant: {restaurant.name}
         </p>
+        <OpeningHoursForm
+  restaurantId={restaurant.id}
+  currentHours={{
+    monday: restaurant.monday,
+    tuesday: restaurant.tuesday,
+    wednesday: restaurant.wednesday,
+    thursday: restaurant.thursday,
+    friday: restaurant.friday,
+    saturday: restaurant.saturday,
+    sunday: restaurant.sunday,
+  }}
+/>
         <RestaurantBrandingForm
   restaurantId={restaurant.id}
   currentLogoUrl={restaurant.logo_url || ""}
