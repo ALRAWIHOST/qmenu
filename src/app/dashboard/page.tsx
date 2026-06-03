@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import UpgradePlanButton from "./UpgradePlanButton";
+import PayPalCheckoutButton from "./PayPalCheckoutButton";
 
 type Restaurant = {
   id: string;
@@ -86,17 +86,15 @@ export default function DashboardPage() {
 
   {restaurant.plan === "free" && (
     <div className="flex gap-2">
-      <UpgradePlanButton
-        restaurantId={restaurant.id}
-        newPlan="basic"
-      />
-
-      <UpgradePlanButton
-        restaurantId={restaurant.id}
-        newPlan="pro"
-      />
+      <PayPalCheckoutButton plan="basic" />
+      <PayPalCheckoutButton plan="pro" />
     </div>
   )}
+
+  {restaurant.plan === "basic" && (
+    <PayPalCheckoutButton plan="pro" />
+  )}
+</div>
 
   {restaurant.plan === "basic" && (
     <UpgradePlanButton
