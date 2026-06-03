@@ -3,51 +3,111 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
-      <header className="flex items-center justify-between px-6 md:px-8 py-5 border-b">
-        <h1 className="text-2xl font-bold">QMenu</h1>
+      <header className="absolute left-0 right-0 top-0 z-20">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+          <h1 className="text-2xl font-extrabold text-white">QMenu</h1>
 
-        <nav className="flex items-center gap-4">
-          <Link href="/login" className="text-gray-700 hover:text-black">
-            Login
-          </Link>
+          <nav className="flex items-center gap-4">
+            <Link href="/login" className="text-sm font-medium text-white/80 hover:text-white">
+              Login
+            </Link>
 
-          <Link
-            href="/register"
-            className="bg-black text-white px-4 py-2 rounded-lg"
-          >
-            Register
-          </Link>
-        </nav>
+            <Link
+              href="/register"
+              className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black"
+            >
+              Register
+            </Link>
+          </nav>
+        </div>
       </header>
 
-      <section className="px-6 py-24 md:py-32 text-center bg-gradient-to-b from-gray-50 to-white">
-        <span className="mb-5 inline-block rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-600">
-          Digitale QR-Speisekarte für Restaurants
-        </span>
+      <section className="relative overflow-hidden bg-[#050505] text-white">
+        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/20 blur-3xl" />
+        <div className="absolute right-0 top-32 h-[350px] w-[350px] rounded-full bg-emerald-500/10 blur-3xl" />
 
-        <h2 className="text-5xl md:text-7xl font-extrabold mb-6">
-          Ihr Menü. Digital. Schnell. Modern.
-        </h2>
+        <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-16 px-6 py-32 lg:grid-cols-2">
+          <div>
+            <div className="mb-6 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80">
+              Digitale QR-Speisekarte für Restaurants
+            </div>
 
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-          Erstellen Sie eine professionelle digitale Speisekarte mit QR-Code,
-          Logo, Cover-Bild, Öffnungszeiten, Social Links und Statistiken.
-        </p>
+            <h2 className="mb-6 text-5xl font-extrabold leading-tight md:text-7xl">
+              Ihr Menü.
+              <br />
+              Digital.
+              <br />
+              Elegant.
+            </h2>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link
-            href="/register"
-            className="bg-black text-white px-8 py-4 rounded-xl text-lg font-semibold"
-          >
-            Jetzt starten
-          </Link>
+            <p className="mb-8 max-w-xl text-lg leading-8 text-white/70">
+              Erstellen Sie eine moderne digitale Speisekarte mit QR-Code,
+              Branding, Öffnungszeiten, Social Links und Statistiken.
+            </p>
 
-          <Link
-            href="/s/qmenu-demo"
-            className="border border-black px-8 py-4 rounded-xl text-lg font-semibold"
-          >
-            Demo ansehen
-          </Link>
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/register"
+                className="rounded-xl bg-white px-8 py-4 text-center font-semibold text-black"
+              >
+                Jetzt starten
+              </Link>
+
+              <Link
+                href="/s/qmenu-demo"
+                className="rounded-xl border border-white/25 px-8 py-4 text-center font-semibold text-white"
+              >
+                Demo ansehen
+              </Link>
+            </div>
+
+            <div className="mt-10 grid max-w-md grid-cols-3 gap-6 text-sm text-white/60">
+              <div>
+                <div className="text-2xl font-bold text-white">QR</div>
+                Menü
+              </div>
+
+              <div>
+                <div className="text-2xl font-bold text-white">24/7</div>
+                Online
+              </div>
+
+              <div>
+                <div className="text-2xl font-bold text-white">SaaS</div>
+                Ready
+              </div>
+            </div>
+          </div>
+
+          <div className="relative flex justify-center">
+            <div className="absolute top-16 h-80 w-80 rounded-full bg-yellow-400/20 blur-3xl" />
+
+            <div className="relative">
+              <div className="rounded-[3rem] border border-white/10 bg-white/10 p-3 shadow-2xl backdrop-blur">
+                <img
+                  src="/landing/phone.png"
+                  alt="QMenu mobile menu preview"
+                  className="h-[560px] w-[280px] rounded-[2.4rem] object-cover"
+                />
+              </div>
+
+              <div className="absolute -bottom-8 -left-8 rounded-3xl border border-white/10 bg-white p-4 shadow-2xl">
+                <img
+                  src="/landing/qr.png"
+                  alt="QR Code"
+                  className="h-28 w-28"
+                />
+                <p className="mt-2 text-center text-sm font-semibold text-black">
+                  Scan & Open
+                </p>
+              </div>
+
+              <div className="absolute -right-8 top-20 rounded-2xl border border-white/10 bg-black/70 px-5 py-4 shadow-xl backdrop-blur">
+                <p className="text-sm text-white/60">Live Analytics</p>
+                <p className="text-2xl font-bold text-white">QR Scans</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
