@@ -2,10 +2,12 @@
 
 type PayPalCheckoutButtonProps = {
   plan: "basic" | "pro";
+  restaurantId: string;
 };
 
 export default function PayPalCheckoutButton({
   plan,
+  restaurantId,
 }: PayPalCheckoutButtonProps) {
   const price = plan === "pro" ? "19€" : "9€";
 
@@ -15,13 +17,17 @@ export default function PayPalCheckoutButton({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ plan }),
+      body: JSON.stringify({
+        plan,
+        restaurantId,
+      }),
     });
 
     const order = await response.json();
 
     const approvalUrl = order.links?.find(
-      (link: { rel: string; href: string }) => link.rel === "approve"
+      (link: { rel: string; href: string }) =>
+        link.rel === "approve"
     )?.href;
 
     if (!approvalUrl) {

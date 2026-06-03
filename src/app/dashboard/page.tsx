@@ -89,13 +89,23 @@ export default function DashboardPage() {
 
                   {plan === "free" && (
                     <div className="flex flex-wrap gap-2">
-                      <PayPalCheckoutButton plan="basic" />
-                      <PayPalCheckoutButton plan="pro" />
+                      <PayPalCheckoutButton
+                        plan="basic"
+                        restaurantId={restaurant.id}
+                      />
+
+                      <PayPalCheckoutButton
+                        plan="pro"
+                        restaurantId={restaurant.id}
+                      />
                     </div>
                   )}
 
                   {plan === "basic" && (
-                    <PayPalCheckoutButton plan="pro" />
+                    <PayPalCheckoutButton
+                      plan="pro"
+                      restaurantId={restaurant.id}
+                    />
                   )}
                 </div>
 

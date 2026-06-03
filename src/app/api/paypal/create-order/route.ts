@@ -28,9 +28,11 @@ async function getPayPalAccessToken() {
 
 export async function POST(request: Request) {
   try {
-    const { plan } = await request.json();
+    const { plan, restaurantId } = await request.json();
 
     const amount = plan === "pro" ? "19.00" : "9.00";
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
     const accessToken = await getPayPalAccessToken();
 
@@ -45,12 +47,20 @@ export async function POST(request: Request) {
         purchase_units: [
           {
             description: `QMenu ${plan.toUpperCase()} Plan`,
+            custom_id: JSON.stringify({
+              plan,
+              restaurantId,
+            }),
             amount: {
               currency_code: "EUR",
               value: amount,
             },
           },
         ],
+        application_context: {
+          return_url: `${baseUrl}/payment/success?plan=${plan}&restaurantId=${restaurantId}`,
+          cancel_url: `${baseUrl}/payment/cancel`,
+        },
       }),
     });
 
