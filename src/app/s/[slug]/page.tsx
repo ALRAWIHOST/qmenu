@@ -75,6 +75,48 @@ export default async function PublicMenuPage({
             {restaurant.address && <span>📍 {restaurant.address}</span>}
             {restaurant.phone && <span>☎ {restaurant.phone}</span>}
           </div>
+          <div className="mt-6 mx-auto max-w-md rounded-2xl border bg-white p-4 text-left">
+  <h2 className="mb-3 text-center font-bold">
+    Öffnungszeiten
+  </h2>
+
+  <div className="space-y-2 text-sm text-gray-600">
+    <div className="flex justify-between">
+      <span>Montag</span>
+      <span>{restaurant.monday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Dienstag</span>
+      <span>{restaurant.tuesday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Mittwoch</span>
+      <span>{restaurant.wednesday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Donnerstag</span>
+      <span>{restaurant.thursday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Freitag</span>
+      <span>{restaurant.friday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Samstag</span>
+      <span>{restaurant.saturday || "-"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Sonntag</span>
+      <span>{restaurant.sunday || "-"}</span>
+    </div>
+  </div>
+</div>
         </div>
       </header>
 
