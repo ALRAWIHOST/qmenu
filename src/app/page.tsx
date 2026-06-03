@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
@@ -5,10 +7,19 @@ export default function Home() {
         <h1 className="text-2xl font-bold">QMenu</h1>
 
         <nav className="flex items-center gap-4">
-          <button className="text-gray-700 hover:text-black">Login</button>
-          <button className="bg-black text-white px-4 py-2 rounded-lg">
+          <Link
+            href="/login"
+            className="text-gray-700 hover:text-black"
+          >
+            Login
+          </Link>
+
+          <Link
+            href="/register"
+            className="bg-black text-white px-4 py-2 rounded-lg"
+          >
             Register
-          </button>
+          </Link>
         </nav>
       </header>
 
@@ -25,17 +36,23 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4">
-          <button className="bg-black text-white px-6 py-3 rounded-lg text-lg">
+          <Link
+            href="/register"
+            className="bg-black text-white px-6 py-3 rounded-lg text-lg"
+          >
             Jetzt starten
-          </button>
+          </Link>
 
-          <button className="border border-black px-6 py-3 rounded-lg text-lg">
+          <Link
+            href="/s/qmenu-demo"
+            className="border border-black px-6 py-3 rounded-lg text-lg"
+          >
             Demo ansehen
-          </button>
+          </Link>
         </div>
 
         <div className="mt-10 text-gray-500 text-sm">
-          DE Deutsch | GB English | SA العربية
+          DE Deutsch | EN English | AR العربية
         </div>
       </section>
 
@@ -93,9 +110,13 @@ export default function Home() {
                 <li>QR-Code inklusive</li>
                 <li>1 Sprache</li>
               </ul>
-              <button className="w-full border border-black py-3 rounded-lg">
+
+              <Link
+                href="/register"
+                className="block w-full text-center border border-black py-3 rounded-lg"
+              >
                 Kostenlos starten
-              </button>
+              </Link>
             </div>
 
             <div className="border-2 border-black rounded-2xl p-8 shadow-lg">
@@ -107,9 +128,13 @@ export default function Home() {
                 <li>Bilder für Produkte</li>
                 <li>Deutsch + Englisch</li>
               </ul>
-              <button className="w-full bg-black text-white py-3 rounded-lg">
+
+              <Link
+                href="/register"
+                className="block w-full text-center bg-black text-white py-3 rounded-lg"
+              >
                 Jetzt starten
-              </button>
+              </Link>
             </div>
 
             <div className="border rounded-2xl p-8">
@@ -121,9 +146,13 @@ export default function Home() {
                 <li>3 Sprachen</li>
                 <li>Statistiken und Support</li>
               </ul>
-              <button className="w-full border border-black py-3 rounded-lg">
+
+              <Link
+                href="/register"
+                className="block w-full text-center border border-black py-3 rounded-lg"
+              >
                 Pro wählen
-              </button>
+              </Link>
             </div>
           </div>
         </div>
