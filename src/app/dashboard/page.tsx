@@ -64,74 +64,70 @@ export default function DashboardPage() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {restaurants.map((restaurant) => (
-            <div
-              key={restaurant.id}
-              className="bg-white border rounded-2xl p-6"
-            >
-              <h3 className="text-xl font-semibold mb-2">
-                {restaurant.name}
-              </h3>
+          {restaurants.map((restaurant) => {
+            const plan = (restaurant.plan || "free").toLowerCase();
 
-              <div className="space-y-3 mb-4">
-  <div className="flex items-center gap-2">
-    <span className="text-sm text-gray-600">
-      Plan:
-    </span>
+            return (
+              <div
+                key={restaurant.id}
+                className="bg-white border rounded-2xl p-6"
+              >
+                <h3 className="text-xl font-semibold mb-2">
+                  {restaurant.name}
+                </h3>
 
-    <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
-      {restaurant.plan || "free"}
-    </span>
-  </div>
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600">
+                      Plan:
+                    </span>
 
-  {restaurant.plan === "free" && (
-    <div className="flex gap-2">
-      <PayPalCheckoutButton plan="basic" />
-      <PayPalCheckoutButton plan="pro" />
-    </div>
-  )}
+                    <span className="px-2 py-1 text-xs rounded-full bg-black text-white uppercase">
+                      {plan}
+                    </span>
+                  </div>
 
-  {restaurant.plan === "basic" && (
-    <PayPalCheckoutButton plan="pro" />
-  )}
-</div>
+                  {plan === "free" && (
+                    <div className="flex flex-wrap gap-2">
+                      <PayPalCheckoutButton plan="basic" />
+                      <PayPalCheckoutButton plan="pro" />
+                    </div>
+                  )}
 
-  {restaurant.plan === "basic" && (
-    <UpgradePlanButton
-      restaurantId={restaurant.id}
-      newPlan="pro"
-    />
-  )}
-</div>
+                  {plan === "basic" && (
+                    <PayPalCheckoutButton plan="pro" />
+                  )}
+                </div>
 
-              <p className="text-gray-600 mb-4">
-                /s/{restaurant.slug}
-              </p>
+                <p className="text-gray-600 mb-4">
+                  /s/{restaurant.slug}
+                </p>
 
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href={`/menu?restaurantId=${restaurant.id}`}
-                  className="bg-black text-white px-4 py-2 rounded-lg"
-                >
-                  Menü bearbeiten
-                </Link>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href={`/menu?restaurantId=${restaurant.id}`}
+                    className="bg-black text-white px-4 py-2 rounded-lg"
+                  >
+                    Menü bearbeiten
+                  </Link>
 
-                <Link
-                  href="/qr"
-                  className="border px-4 py-2 rounded-lg"
-                >
-                  QR
-                </Link>
+                  <Link
+                    href="/qr"
+                    className="border px-4 py-2 rounded-lg"
+                  >
+                    QR
+                  </Link>
 
-                <Link
-                  href={`/s/${restaurant.slug}`}
-                  className="border px-4 py-2 rounded-lg"
-                >
-                  Vorschau
-                </Link>
+                  <Link
+                    href={`/s/${restaurant.slug}`}
+                    className="border px-4 py-2 rounded-lg"
+                  >
+                    Vorschau
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </main>
