@@ -55,15 +55,15 @@ export default function RegisterPage() {
     const slug = createSlug(restaurantName);
 
     const { error: restaurantError } = await supabase
-      .from("restaurants")
-      .insert({
-  name: restaurantName,
-  slug,
-  phone: "",
-  address: "",
-  user_id: user.id,
-  plan: selectedPlan,
-});
+  .from("restaurants")
+  .insert({
+    name: restaurantName,
+    slug,
+    phone: "",
+    address: "",
+    user_id: user.id,
+    plan: selectedPlan,
+  });
 
     if (restaurantError) {
       alert(restaurantError.message);
