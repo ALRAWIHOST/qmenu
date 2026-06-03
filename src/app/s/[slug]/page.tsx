@@ -67,18 +67,13 @@ export default async function PublicMenuPage({
             />
           )}
 
-          <h1 className="text-5xl font-extrabold tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight break-words">
             {restaurant.name}
           </h1>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-gray-600">
-            {restaurant.address && (
-              <span>📍 {restaurant.address}</span>
-            )}
-
-            {restaurant.phone && (
-              <span>☎ {restaurant.phone}</span>
-            )}
+            {restaurant.address && <span>📍 {restaurant.address}</span>}
+            {restaurant.phone && <span>☎ {restaurant.phone}</span>}
           </div>
         </div>
       </header>
@@ -106,11 +101,9 @@ export default async function PublicMenuPage({
         </div>
       </nav>
 
-      <section id="all" className="max-w-5xl mx-auto px-6 py-10">
+      <section id="all" className="max-w-5xl mx-auto px-4 md:px-6 py-10">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold">
-            Unsere Speisekarte
-          </h2>
+          <h2 className="text-3xl font-bold">Unsere Speisekarte</h2>
           <div className="mt-3 h-1 w-16 rounded-full bg-black" />
         </div>
 
@@ -125,9 +118,7 @@ export default async function PublicMenuPage({
 
             return (
               <div key={category.id} id={category.id}>
-                <h3 className="mb-5 text-2xl font-bold">
-                  {category.name}
-                </h3>
+                <h3 className="mb-5 text-2xl font-bold">{category.name}</h3>
 
                 <div className="space-y-4">
                   {categoryProducts.map((product) => (
@@ -139,26 +130,26 @@ export default async function PublicMenuPage({
                         <img
                           src={product.image_url}
                           alt={product.name}
-                          className="h-28 w-28 rounded-2xl object-cover"
+                          className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl object-cover"
                         />
                       ) : (
-                        <div className="h-28 w-28 rounded-2xl bg-gray-100" />
+                        <div className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl bg-gray-100" />
                       )}
 
-                      <div className="flex flex-1 items-center justify-between gap-4">
-                        <div>
-                          <h4 className="text-xl font-bold">
+                      <div className="flex min-w-0 flex-1 flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                        <div className="min-w-0">
+                          <h4 className="text-lg md:text-xl font-bold break-words">
                             {product.name}
                           </h4>
 
                           {product.description && (
-                            <p className="mt-1 text-gray-500">
+                            <p className="mt-1 text-sm md:text-base text-gray-500 break-words">
                               {product.description}
                             </p>
                           )}
                         </div>
 
-                        <span className="whitespace-nowrap text-xl font-extrabold text-emerald-700">
+                        <span className="self-start md:self-auto whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-lg font-bold text-emerald-700">
                           {product.price}€
                         </span>
                       </div>
