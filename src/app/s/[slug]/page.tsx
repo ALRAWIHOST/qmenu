@@ -75,52 +75,98 @@ export default async function PublicMenuPage({
             {restaurant.address && <span>📍 {restaurant.address}</span>}
             {restaurant.phone && <span>☎ {restaurant.phone}</span>}
           </div>
+
           <div className="mt-6 mx-auto max-w-md rounded-2xl border bg-white p-4 text-left">
-  <h2 className="mb-3 text-center font-bold">
-    Öffnungszeiten
-  </h2>
+            <h2 className="mb-3 text-center font-bold">
+              Öffnungszeiten
+            </h2>
 
-  <div className="space-y-2 text-sm text-gray-600">
-    <div className="flex justify-between">
-      <span>Montag</span>
-      <span>{restaurant.monday || "-"}</span>
-    </div>
+            <div className="space-y-2 text-sm text-gray-600">
+              <div className="flex justify-between">
+                <span>Montag</span>
+                <span>{restaurant.monday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Dienstag</span>
-      <span>{restaurant.tuesday || "-"}</span>
-    </div>
+              <div className="flex justify-between">
+                <span>Dienstag</span>
+                <span>{restaurant.tuesday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Mittwoch</span>
-      <span>{restaurant.wednesday || "-"}</span>
-    </div>
+              <div className="flex justify-between">
+                <span>Mittwoch</span>
+                <span>{restaurant.wednesday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Donnerstag</span>
-      <span>{restaurant.thursday || "-"}</span>
-    </div>
+              <div className="flex justify-between">
+                <span>Donnerstag</span>
+                <span>{restaurant.thursday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Freitag</span>
-      <span>{restaurant.friday || "-"}</span>
-    </div>
+              <div className="flex justify-between">
+                <span>Freitag</span>
+                <span>{restaurant.friday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Samstag</span>
-      <span>{restaurant.saturday || "-"}</span>
-    </div>
+              <div className="flex justify-between">
+                <span>Samstag</span>
+                <span>{restaurant.saturday || "-"}</span>
+              </div>
 
-    <div className="flex justify-between">
-      <span>Sonntag</span>
-      <span>{restaurant.sunday || "-"}</span>
-    </div>
-  </div>
-</div>
+              <div className="flex justify-between">
+                <span>Sonntag</span>
+                <span>{restaurant.sunday || "-"}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            {restaurant.whatsapp_url && (
+              <a
+                href={restaurant.whatsapp_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white"
+              >
+                WhatsApp
+              </a>
+            )}
+
+            {restaurant.instagram_url && (
+              <a
+                href={restaurant.instagram_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-pink-500 px-4 py-2 text-sm font-semibold text-white"
+              >
+                Instagram
+              </a>
+            )}
+
+            {restaurant.facebook_url && (
+              <a
+                href={restaurant.facebook_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white"
+              >
+                Facebook
+              </a>
+            )}
+
+            {restaurant.tiktok_url && (
+              <a
+                href={restaurant.tiktok_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-black px-4 py-2 text-sm font-semibold text-white"
+              >
+                TikTok
+              </a>
+            )}
+          </div>
         </div>
       </header>
-
-      <nav className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b">
+            <nav className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b">
         <div className="max-w-5xl mx-auto px-4 md:px-6 overflow-x-auto">
           <div className="flex gap-3 py-4">
             <a

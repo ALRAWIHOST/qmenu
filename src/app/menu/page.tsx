@@ -7,6 +7,7 @@ import DeleteCategoryButton from "./DeleteCategoryButton";
 import EditCategoryForm from "./EditCategoryForm";
 import RestaurantBrandingForm from "./RestaurantBrandingForm";
 import OpeningHoursForm from "./OpeningHoursForm";
+import SocialLinksForm from "./SocialLinksForm";
 
 type MenuPageProps = {
   searchParams: Promise<{
@@ -71,6 +72,15 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
     friday: restaurant.friday,
     saturday: restaurant.saturday,
     sunday: restaurant.sunday,
+  }}
+/>
+<SocialLinksForm
+  restaurantId={restaurant.id}
+  currentLinks={{
+    whatsapp_url: restaurant.whatsapp_url,
+    instagram_url: restaurant.instagram_url,
+    facebook_url: restaurant.facebook_url,
+    tiktok_url: restaurant.tiktok_url,
   }}
 />
         <RestaurantBrandingForm
