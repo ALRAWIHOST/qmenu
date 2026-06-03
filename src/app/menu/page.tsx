@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import AddCategoryForm from "./AddCategoryForm";
 import AddProductForm from "./AddProductForm";
+import EditProductForm from "./EditProductForm";
+import DeleteProductButton from "./DeleteProductButton";
 
 export default async function MenuPage() {
   const { data: restaurants } = await supabase
@@ -71,7 +73,21 @@ export default async function MenuPage() {
                       </p>
                     </div>
 
-                    <span className="font-bold">{product.price}€</span>
+                    <div className="flex flex-col items-end gap-2">
+  <span className="font-bold">{product.price}€</span>
+
+  <div className="flex gap-2">
+    <EditProductForm
+      productId={product.id}
+      currentName={product.name}
+      currentPrice={product.price}
+    />
+
+    <DeleteProductButton
+      productId={product.id}
+    />
+  </div>
+</div>
                   </div>
                 </li>
               ))}

@@ -20,6 +20,7 @@ export default function AddProductForm({
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleAddProduct = async () => {
     if (!name.trim()) {
@@ -32,13 +33,36 @@ export default function AddProductForm({
       return;
     }
 
+    let imageUrl = "";
+
+    if (imageFile) {
+      const fileExt = imageFile.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `${restaurantId}/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("product-images")
+        .upload(filePath, imageFile);
+
+      if (uploadError) {
+        alert(uploadError.message);
+        return;
+      }
+
+      const { data } = supabase.storage
+        .from("product-images")
+        .getPublicUrl(filePath);
+
+      imageUrl = data.publicUrl;
+    }
+
     const { error } = await supabase.from("products").insert({
       restaurant_id: restaurantId,
       category_id: categoryId || null,
-      name: name,
+      name,
       price: Number(price),
       description: "",
-      image_url: "",
+      image_url: imageUrl,
       is_available: true,
     });
 
@@ -50,6 +74,7 @@ export default function AddProductForm({
     setName("");
     setPrice("");
     setCategoryId("");
+    setImageFile(null);
     window.location.reload();
   };
 
@@ -84,6 +109,13 @@ export default function AddProductForm({
           </option>
         ))}
       </select>
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+        className="w-full border p-3 rounded-lg"
+      />
 
       <button
         onClick={handleAddProduct}

@@ -20,17 +20,43 @@ export default function RegisterPage() {
   };
 
   const handleRegister = async () => {
+    if (!restaurantName.trim() || !email.trim() || !password.trim()) {
+      alert("Bitte alle Felder ausfüllen");
+      return;
+    }
+
+    const { data: authData, error: authError } =
+      await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+    if (authError) {
+      alert(authError.message);
+      return;
+    }
+
+    const user = authData.user;
+
+    if (!user) {
+      alert("Benutzer konnte nicht erstellt werden");
+      return;
+    }
+
     const slug = createSlug(restaurantName);
 
-    const { error } = await supabase.from("restaurants").insert({
-      name: restaurantName,
-      slug: slug,
-      phone: "",
-      address: "",
-    });
+    const { error: restaurantError } = await supabase
+      .from("restaurants")
+      .insert({
+        name: restaurantName,
+        slug,
+        phone: "",
+        address: "",
+        user_id: user.id,
+      });
 
-    if (error) {
-      alert(error.message);
+    if (restaurantError) {
+      alert(restaurantError.message);
       return;
     }
 

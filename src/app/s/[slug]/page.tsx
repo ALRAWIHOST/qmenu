@@ -32,9 +32,7 @@ export default async function PublicMenuPage({
   if (!restaurant) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <h1 className="text-3xl font-bold">
-          Restaurant nicht gefunden
-        </h1>
+        <h1 className="text-3xl font-bold">Restaurant nicht gefunden</h1>
       </main>
     );
   }
@@ -49,33 +47,43 @@ export default async function PublicMenuPage({
       <section className="max-w-3xl mx-auto p-6">
         {categories?.map((category) => (
           <div key={category.id} className="mb-10">
-            <h2 className="text-2xl font-bold mb-4">
-              {category.name}
-            </h2>
+            <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {products
                 ?.filter((product) => product.category_id === category.id)
                 .map((product) => (
                   <div
                     key={product.id}
-                    className="bg-white border rounded-2xl p-4 flex justify-between"
+                    className="bg-white border rounded-2xl p-4 flex gap-4"
                   >
-                    <div>
-                      <h3 className="font-semibold text-lg">
-                        {product.name}
-                      </h3>
+                    {product.image_url && (
+                      <img
+                        src={product.image_url}
+                        alt={product.name}
+                        className="h-24 w-24 rounded-xl object-cover"
+                      />
+                    )}
 
-                      {product.description && (
-                        <p className="text-gray-500">
-                          {product.description}
-                        </p>
-                      )}
+                    <div className="flex-1">
+                      <div className="flex justify-between gap-4">
+                        <div>
+                          <h3 className="font-semibold text-lg">
+                            {product.name}
+                          </h3>
+
+                          {product.description && (
+                            <p className="text-gray-500">
+                              {product.description}
+                            </p>
+                          )}
+                        </div>
+
+                        <span className="font-bold whitespace-nowrap">
+                          {product.price}€
+                        </span>
+                      </div>
                     </div>
-
-                    <span className="font-bold">
-                      {product.price}€
-                    </span>
                   </div>
                 ))}
             </div>
