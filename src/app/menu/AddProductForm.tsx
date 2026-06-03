@@ -34,6 +34,45 @@ export default function AddProductForm({
       return;
     }
 
+    const { data: restaurant, error: restaurantError } = await supabase
+      .from("restaurants")
+      .select("plan")
+      .eq("id", restaurantId)
+      .single();
+
+    if (restaurantError) {
+      alert(restaurantError.message);
+      return;
+    }
+
+    const plan = restaurant?.plan || "free";
+
+    const { count, error: countError } = await supabase
+      .from("products")
+      .select("*", { count: "exact", head: true })
+      .eq("restaurant_id", restaurantId);
+
+    if (countError) {
+      alert(countError.message);
+      return;
+    }
+
+    const productCount = count || 0;
+
+    if (plan === "free" && productCount >= 5) {
+      alert(
+        "Ihr Free-Plan erlaubt maximal 5 Produkte. Bitte upgraden Sie auf Basic oder Pro."
+      );
+      return;
+    }
+
+    if (plan === "basic" && productCount >= 50) {
+      alert(
+        "Ihr Basic-Plan erlaubt maximal 50 Produkte. Bitte upgraden Sie auf Pro."
+      );
+      return;
+    }
+
     let imageUrl = "";
 
     if (imageFile) {
