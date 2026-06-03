@@ -118,13 +118,15 @@ export default async function PublicMenuPage({
 
             return (
               <div key={category.id} id={category.id}>
-                <h3 className="mb-5 text-2xl font-bold">{category.name}</h3>
+                <h3 className="mb-5 text-2xl font-bold">
+                  {category.name}
+                </h3>
 
                 <div className="space-y-4">
                   {categoryProducts.map((product) => (
                     <div
                       key={product.id}
-                      className="group flex gap-4 rounded-3xl border bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                      className="group flex gap-3 rounded-3xl border bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                     >
                       {product.image_url ? (
                         <img
@@ -136,20 +138,20 @@ export default async function PublicMenuPage({
                         <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-gray-100" />
                       )}
 
-                      <div className="flex min-w-0 flex-1 flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="flex min-w-0 flex-1 flex-col gap-2">
                         <div className="min-w-0">
-                          <h4 className="text-lg md:text-xl font-bold break-words">
+                          <h4 className="text-base md:text-lg font-bold break-words">
                             {product.name}
                           </h4>
 
                           {product.description && (
-                            <p className="mt-1 text-sm md:text-base text-gray-500 break-words">
+                            <p className="mt-1 text-sm text-gray-500 break-words">
                               {product.description}
                             </p>
                           )}
                         </div>
 
-                        <span className="self-start md:self-auto whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-base font-bold text-emerald-700">
+                        <span className="self-start whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1 text-sm font-semibold text-emerald-700">
                           {product.price}€
                         </span>
                       </div>
