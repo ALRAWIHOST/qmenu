@@ -19,6 +19,7 @@ export default function AddProductForm({
 }: AddProductFormProps) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -61,7 +62,7 @@ export default function AddProductForm({
       category_id: categoryId || null,
       name,
       price: Number(price),
-      description: "",
+      description,
       image_url: imageUrl,
       is_available: true,
     });
@@ -73,6 +74,7 @@ export default function AddProductForm({
 
     setName("");
     setPrice("");
+    setDescription("");
     setCategoryId("");
     setImageFile(null);
     window.location.reload();
@@ -94,6 +96,14 @@ export default function AddProductForm({
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         className="w-full border p-3 rounded-lg"
+      />
+
+      <textarea
+        placeholder="Produktbeschreibung"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="w-full border p-3 rounded-lg"
+        rows={3}
       />
 
       <select

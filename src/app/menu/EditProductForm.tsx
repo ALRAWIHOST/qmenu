@@ -7,16 +7,19 @@ type EditProductFormProps = {
   productId: string;
   currentName: string;
   currentPrice: number;
+  currentDescription?: string;
 };
 
 export default function EditProductForm({
   productId,
   currentName,
   currentPrice,
+  currentDescription = "",
 }: EditProductFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(currentName);
   const [price, setPrice] = useState(String(currentPrice));
+  const [description, setDescription] = useState(currentDescription);
 
   const handleUpdate = async () => {
     if (!name.trim()) {
@@ -34,6 +37,7 @@ export default function EditProductForm({
       .update({
         name,
         price: Number(price),
+        description,
       })
       .eq("id", productId);
 
@@ -71,6 +75,13 @@ export default function EditProductForm({
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         className="w-full border p-2 rounded-lg"
+      />
+
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="w-full border p-2 rounded-lg"
+        rows={3}
       />
 
       <div className="flex gap-2">

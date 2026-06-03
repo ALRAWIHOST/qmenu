@@ -71,6 +71,11 @@ export default async function MenuPage() {
                       <p className="text-sm text-gray-500">
                         {product.categories?.name || "Ohne Kategorie"}
                       </p>
+                      {product.description && (
+  <p className="text-sm text-gray-600 mt-1">
+    {product.description}
+  </p>
+)}
                     </div>
 
                     <div className="flex flex-col items-end gap-2">
@@ -78,10 +83,11 @@ export default async function MenuPage() {
 
   <div className="flex gap-2">
     <EditProductForm
-      productId={product.id}
-      currentName={product.name}
-      currentPrice={product.price}
-    />
+  productId={product.id}
+  currentName={product.name}
+  currentPrice={product.price}
+  currentDescription={product.description || ""}
+/>
 
     <DeleteProductButton
       productId={product.id}
