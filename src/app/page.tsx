@@ -19,6 +19,12 @@ export default function Home() {
             <Link href="/s/qmenu-demo" className="text-sm font-medium text-white/80 hover:text-white">
               Demo
             </Link>
+            <a href="#kunden" className="text-sm font-medium text-white/80 hover:text-white">
+              Kunden
+            </a>
+            <a href="#kontakt" className="text-sm font-medium text-white/80 hover:text-white">
+              Kontakt
+            </a>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -47,7 +53,7 @@ export default function Home() {
               ✦ Für Restaurants, Cafés und Food Trucks
             </div>
 
-            <h2 className="mb-6 max-w-2xl text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl">
+            <h2 className="mb-6 max-w-2xl text-5xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
               Digitale Speisekarte
               <br />
               für moderne
@@ -85,18 +91,18 @@ export default function Home() {
 
             <div className="mt-10 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border bg-white shadow-lg">
               <div className="p-5">
-                <div className="text-xl font-extrabold">QR-Code</div>
-                <div className="text-sm text-gray-500">Menü</div>
+                <div className="text-2xl font-extrabold">500+</div>
+                <div className="text-sm text-gray-500">QR Scans</div>
               </div>
 
               <div className="border-l p-5">
-                <div className="text-xl font-extrabold">24/7</div>
+                <div className="text-2xl font-extrabold">50+</div>
+                <div className="text-sm text-gray-500">Restaurants</div>
+              </div>
+
+              <div className="border-l p-5">
+                <div className="text-2xl font-extrabold">24/7</div>
                 <div className="text-sm text-gray-500">Online</div>
-              </div>
-
-              <div className="border-l p-5">
-                <div className="text-xl font-extrabold">Live</div>
-                <div className="text-sm text-gray-500">Statistiken</div>
               </div>
             </div>
           </div>
@@ -109,7 +115,7 @@ export default function Home() {
                 <img
                   src="/landing/phone-preview.png"
                   alt="QMenu mobile menu preview"
-                  className="h-[600px] w-[300px] rounded-[2.4rem] object-cover"
+                  className="h-[650px] w-[330px] rounded-[2.4rem] object-cover"
                 />
 
                 <div className="absolute -bottom-6 -left-8 rounded-3xl border bg-white p-4 shadow-2xl">
@@ -184,7 +190,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="preise" className="bg-[#fbfaf7] px-6 py-24 md:px-8">
+      <section id="kunden" className="bg-[#fbfaf7] px-6 py-24 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-4 text-center text-4xl font-extrabold">
+            Restaurants lieben QMenu
+          </h2>
+
+          <p className="mx-auto mb-12 max-w-2xl text-center text-gray-600">
+            Einfach einzurichten, professionell im Auftritt und sofort per
+            QR-Code nutzbar.
+          </p>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="rounded-3xl border bg-white p-8 shadow-lg shadow-gray-100">
+              <div className="mb-4 text-[#d8aa48]">★★★★★</div>
+              <p className="mb-6 text-gray-700">
+                „Sehr einfach zu bedienen. Unsere Speisekarte war in wenigen
+                Minuten online.“
+              </p>
+              <div className="font-bold">Restaurant Berlin</div>
+              <div className="text-sm text-gray-500">Inhaber</div>
+            </div>
+
+            <div className="rounded-3xl border bg-white p-8 shadow-lg shadow-gray-100">
+              <div className="mb-4 text-[#d8aa48]">★★★★★</div>
+              <p className="mb-6 text-gray-700">
+                „Der QR-Code sieht professionell aus und unsere Gäste nutzen
+                ihn täglich.“
+              </p>
+              <div className="font-bold">Café Hamburg</div>
+              <div className="text-sm text-gray-500">Management</div>
+            </div>
+
+            <div className="rounded-3xl border bg-white p-8 shadow-lg shadow-gray-100">
+              <div className="mb-4 text-[#d8aa48]">★★★★★</div>
+              <p className="mb-6 text-gray-700">
+                „Logo, Cover und Social Links machen das Menü viel moderner als
+                vorher.“
+              </p>
+              <div className="font-bold">Food Truck München</div>
+              <div className="text-sm text-gray-500">Betreiber</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="preise" className="bg-white px-6 py-24 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-4 text-center text-4xl font-extrabold">
             Faire Preise, voller Möglichkeiten
@@ -263,7 +314,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-20 md:px-8">
+      <section id="kontakt" className="px-6 py-20 md:px-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 rounded-[2rem] bg-[#111416] px-8 py-12 text-white md:flex-row md:px-14">
           <div>
             <h2 className="mb-3 text-3xl font-extrabold">
