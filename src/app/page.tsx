@@ -107,7 +107,7 @@ export default function Home() {
             <div className="relative flex items-end gap-6">
               <div className="relative rounded-[3rem] border bg-white p-4 shadow-2xl">
                 <img
-                  src="/landing/phone.png"
+                  src="/landing/phone-preview.png"
                   alt="QMenu mobile menu preview"
                   className="h-[600px] w-[300px] rounded-[2.4rem] object-cover"
                 />
