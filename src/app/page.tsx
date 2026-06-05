@@ -16,7 +16,7 @@ export default function Home() {
             <a href="#preise" className="text-sm font-medium text-white/80 hover:text-white">
               Preise
             </a>
-            <Link href="/s/qmenu-demo" className="text-sm font-medium text-white/80 hover:text-white">
+            <Link href="/demo" className="text-sm font-medium text-white/80 hover:text-white">
               Demo
             </Link>
             <a href="#kunden" className="text-sm font-medium text-white/80 hover:text-white">
@@ -76,7 +76,7 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/s/qmenu-demo"
+                href="/demo"
                 className="rounded-xl border border-gray-400 bg-white px-8 py-4 text-center font-bold text-black hover:bg-gray-50"
               >
                 Demo ansehen ▷
