@@ -17,7 +17,7 @@ export default function RegisterPage() {
     const params = new URLSearchParams(window.location.search);
     const plan = params.get("plan");
 
-    if (plan) {
+    if (plan === "free" || plan === "basic" || plan === "pro") {
       setSelectedPlan(plan);
     }
   }, []);
@@ -55,7 +55,7 @@ export default function RegisterPage() {
 
     const slug = createSlug(restaurantName);
 
-    const { error: restaurantError } = await supabase
+    const { data: newRestaurant, error: restaurantError } = await supabase
       .from("restaurants")
       .insert({
         name: restaurantName,
@@ -63,11 +63,25 @@ export default function RegisterPage() {
         phone: "",
         address: "",
         user_id: user.id,
-        plan: selectedPlan,
-      });
+        plan: "free",
+      })
+      .select()
+      .single();
 
     if (restaurantError) {
       alert(restaurantError.message);
+      return;
+    }
+
+    if (!newRestaurant) {
+      alert("Restaurant konnte nicht erstellt werden");
+      return;
+    }
+
+    if (selectedPlan === "basic" || selectedPlan === "pro") {
+      router.push(
+        `/checkout?restaurantId=${newRestaurant.id}&plan=${selectedPlan}`
+      );
       return;
     }
 
@@ -104,12 +118,16 @@ export default function RegisterPage() {
             </div>
 
             <div className="border-l border-white/10 p-5">
-              <div className="text-2xl font-extrabold text-[#d8aa48]">24/7</div>
+              <div className="text-2xl font-extrabold text-[#d8aa48]">
+                24/7
+              </div>
               <div className="text-sm text-white/60">Online</div>
             </div>
 
             <div className="border-l border-white/10 p-5">
-              <div className="text-2xl font-extrabold text-[#d8aa48]">Live</div>
+              <div className="text-2xl font-extrabold text-[#d8aa48]">
+                Live
+              </div>
               <div className="text-sm text-white/60">Stats</div>
             </div>
           </div>
@@ -136,13 +154,17 @@ export default function RegisterPage() {
             </div>
 
             <div className="mb-5 rounded-2xl bg-[#f7f4ed] p-4 text-center">
-              <p className="text-sm text-gray-600">
-                Gewählter Plan
-              </p>
+              <p className="text-sm text-gray-600">Gewählter Plan</p>
 
               <p className="font-extrabold uppercase text-[#7a5a16]">
                 {selectedPlan}
               </p>
+
+              {(selectedPlan === "basic" || selectedPlan === "pro") && (
+                <p className="mt-2 text-xs text-gray-500">
+                  Zahlung erfolgt im nächsten Schritt.
+                </p>
+              )}
             </div>
 
             <input
@@ -173,7 +195,9 @@ export default function RegisterPage() {
               onClick={handleRegister}
               className="w-full rounded-xl bg-[#111416] p-4 font-bold text-white hover:bg-black"
             >
-              Konto erstellen
+              {selectedPlan === "basic" || selectedPlan === "pro"
+                ? "Weiter zur Zahlung"
+                : "Konto erstellen"}
             </button>
 
             <p className="mt-6 text-center text-sm text-gray-500">
