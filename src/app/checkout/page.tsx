@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import PayPalCheckoutButton from "../dashboard/PayPalCheckoutButton";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
 
   const restaurantId = searchParams.get("restaurantId");
@@ -43,7 +44,9 @@ export default function CheckoutPage() {
         </div>
 
         <div className="rounded-2xl bg-[#f7f4ed] p-5 mb-6 text-center">
-          <p className="text-sm text-gray-600 mb-2">Jetzt bezahlen mit PayPal</p>
+          <p className="text-sm text-gray-600 mb-2">
+            Jetzt bezahlen mit PayPal
+          </p>
 
           <PayPalCheckoutButton plan={plan} restaurantId={restaurantId} />
         </div>
@@ -56,5 +59,19 @@ export default function CheckoutPage() {
         </Link>
       </div>
     </main>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center bg-[#111416] text-white">
+          Loading checkout...
+        </main>
+      }
+    >
+      <CheckoutContent />
+    </Suspense>
   );
 }
