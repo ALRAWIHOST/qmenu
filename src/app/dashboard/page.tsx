@@ -13,6 +13,7 @@ type Restaurant = {
   plan?: string;
   menuViews?: number;
   qrScans?: number;
+  paypal_subscription_id?: string;
 };
 
 export default function DashboardPage() {
@@ -61,6 +62,34 @@ export default function DashboardPage() {
 
     loadData();
   }, [router]);
+
+  const handleCancelSubscription = async (restaurantId: string) => {
+    const confirmed = confirm(
+      "Möchten Sie Ihr Abonnement wirklich kündigen?"
+    );
+
+    if (!confirmed) return;
+
+    const response = await fetch("/api/paypal/cancel-subscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        restaurantId,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.error || "Kündigung fehlgeschlagen");
+      return;
+    }
+
+    alert("Abonnement erfolgreich gekündigt.");
+    window.location.reload();
+  };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -273,13 +302,26 @@ export default function DashboardPage() {
                     {plan === "basic" && (
                       <div className="rounded-2xl bg-[#f7f4ed] p-5">
                         <p className="mb-3 text-sm font-bold">
-                          Upgrade auf Pro
+                          Basic Plan aktiv
                         </p>
 
-                        <PayPalCheckoutButton
-                          plan="pro"
-                          restaurantId={restaurant.id}
-                        />
+                        <div className="flex flex-wrap gap-2">
+                          <PayPalCheckoutButton
+                            plan="pro"
+                            restaurantId={restaurant.id}
+                          />
+
+                          {restaurant.paypal_subscription_id && (
+                            <button
+                              onClick={() =>
+                                handleCancelSubscription(restaurant.id)
+                              }
+                              className="rounded-xl border border-red-500 px-4 py-2 text-sm font-bold text-red-600"
+                            >
+                              Abo kündigen
+                            </button>
+                          )}
+                        </div>
                       </div>
                     )}
 
@@ -293,6 +335,17 @@ export default function DashboardPage() {
                           Alle Premium-Funktionen sind für dieses Restaurant
                           freigeschaltet.
                         </p>
+
+                        {restaurant.paypal_subscription_id && (
+                          <button
+                            onClick={() =>
+                              handleCancelSubscription(restaurant.id)
+                            }
+                            className="mt-4 rounded-xl border border-red-500 px-4 py-2 text-sm font-bold text-red-600"
+                          >
+                            Abo kündigen
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
