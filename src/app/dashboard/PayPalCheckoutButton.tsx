@@ -13,7 +13,7 @@ export default function PayPalCheckoutButton({
 
   const handleCheckout = async () => {
     try {
-      const response = await fetch("/api/paypal/create-order", {
+      const response = await fetch("/api/paypal/create-subscription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function PayPalCheckoutButton({
       onClick={handleCheckout}
       className="border px-4 py-2 rounded-lg"
     >
-      Upgrade auf {plan.toUpperCase()} - {price}
+      Monatlich abonnieren: {plan.toUpperCase()} - {price}/Monat
     </button>
   );
 }
