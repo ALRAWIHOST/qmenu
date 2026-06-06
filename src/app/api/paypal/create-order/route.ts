@@ -3,7 +3,9 @@ import { NextResponse } from "next/server";
 const PAYPAL_API_BASE = "https://api-m.sandbox.paypal.com";
 
 async function getPayPalAccessToken() {
-  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+  const clientId =
+  process.env.PAYPAL_CLIENT_ID ||
+  process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
@@ -68,9 +70,15 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json(
-      { error: "PayPal order creation failed" },
-      { status: 500 }
-    );
-  }
+  console.error("PayPal create order error:", error);
+
+  return NextResponse.json(
+    {
+      error:
+        error instanceof Error
+          ? error.message
+          : "PayPal order creation failed",
+    },
+    { status: 500 }
+  );
 }
