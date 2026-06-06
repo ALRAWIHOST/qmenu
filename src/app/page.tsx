@@ -380,7 +380,12 @@ export default function Home() {
           Datenschutz
         </Link>
 
-        <p>AGB</p>
+        <Link
+  href="/agb"
+  className="block hover:text-white transition"
+>
+  AGB
+</Link>
 
         <Link
           href="/impressum"
