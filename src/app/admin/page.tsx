@@ -13,6 +13,7 @@ type Restaurant = {
   slug: string;
   plan?: string;
   created_at: string;
+  paypal_subscription_id?: string;
 };
 
 export default function AdminPage() {
@@ -74,7 +75,7 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center bg-[#111416] text-white">
         <h1 className="text-2xl font-bold">Loading...</h1>
       </main>
     );
@@ -82,7 +83,7 @@ export default function AdminPage() {
 
   if (!allowed) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center bg-[#111416] text-white">
         <h1 className="text-3xl font-bold">Zugriff verweigert</h1>
       </main>
     );
@@ -93,122 +94,210 @@ export default function AdminPage() {
   ).length;
 
   const basicCount = restaurants.filter(
-    (restaurant) => restaurant.plan === "basic"
+    (restaurant) => (restaurant.plan || "free").toLowerCase() === "basic"
   ).length;
 
   const proCount = restaurants.filter(
-    (restaurant) => restaurant.plan === "pro"
+    (restaurant) => (restaurant.plan || "free").toLowerCase() === "pro"
   ).length;
 
-  const filteredRestaurants = restaurants.filter((restaurant) =>
-  restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
-  restaurant.slug.toLowerCase().includes(search.toLowerCase()) ||
-  (restaurant.plan || "free")
-    .toLowerCase()
-    .includes(search.toLowerCase())
-);
+  const activeSubscriptions = restaurants.filter(
+    (restaurant) => restaurant.paypal_subscription_id
+  ).length;
+
+  const expectedMrr = basicCount * 9 + proCount * 19;
+
+  const filteredRestaurants = restaurants.filter((restaurant) => {
+    const plan = restaurant.plan || "free";
+
+    return (
+      restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
+      restaurant.slug.toLowerCase().includes(search.toLowerCase()) ||
+      plan.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-  <h1 className="text-4xl font-bold">
-    QMenu Admin
-  </h1>
+    <main className="min-h-screen bg-[#f7f4ed] text-gray-950">
+      <header className="bg-[#111416] text-white">
+        <div className="mx-auto max-w-7xl px-6 py-8">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="mb-2 text-sm font-bold text-[#d8aa48]">
+                Plattform Verwaltung
+              </p>
 
-  <AdminLogoutButton />
-</div>
+              <h1 className="text-4xl font-extrabold">
+                QMenu Admin
+              </h1>
 
-        <div className="grid md:grid-cols-6 gap-4 mb-8">
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">Restaurants</div>
-            <div className="text-3xl font-bold">{restaurants.length}</div>
+              <p className="mt-2 text-white/60">
+                Übersicht über Restaurants, Pläne, Views, QR-Scans und Umsatz.
+              </p>
+            </div>
+
+            <AdminLogoutButton />
           </div>
 
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">Menu Views</div>
-            <div className="text-3xl font-bold">{menuViews}</div>
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <div className="text-sm text-white/50">Restaurants</div>
+              <div className="mt-2 text-4xl font-extrabold">
+                {restaurants.length}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <div className="text-sm text-white/50">Aktive Abos</div>
+              <div className="mt-2 text-4xl font-extrabold">
+                {activeSubscriptions}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <div className="text-sm text-white/50">MRR erwartet</div>
+              <div className="mt-2 text-4xl font-extrabold">
+                {expectedMrr}€
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <div className="text-sm text-white/50">Traffic</div>
+              <div className="mt-2 text-4xl font-extrabold">
+                {menuViews + qrScans}
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-6 grid gap-4 md:grid-cols-6">
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">Menu Views</div>
+            <div className="text-3xl font-extrabold">{menuViews}</div>
           </div>
 
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">QR Scans</div>
-            <div className="text-3xl font-bold">{qrScans}</div>
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">QR Scans</div>
+            <div className="text-3xl font-extrabold">{qrScans}</div>
           </div>
 
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">Free</div>
-            <div className="text-3xl font-bold">{freeCount}</div>
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">Free</div>
+            <div className="text-3xl font-extrabold">{freeCount}</div>
           </div>
 
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">Basic</div>
-            <div className="text-3xl font-bold">{basicCount}</div>
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">Basic</div>
+            <div className="text-3xl font-extrabold">{basicCount}</div>
           </div>
 
-          <div className="bg-white border rounded-2xl p-5">
-            <div className="text-gray-500 text-sm">Pro</div>
-            <div className="text-3xl font-bold">{proCount}</div>
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">Pro</div>
+            <div className="text-3xl font-extrabold">{proCount}</div>
+          </div>
+
+          <div className="rounded-2xl border bg-white p-5">
+            <div className="text-sm text-gray-500">Conversion</div>
+            <div className="text-3xl font-extrabold">
+              {restaurants.length > 0
+                ? Math.round(
+                    ((basicCount + proCount) / restaurants.length) * 100
+                  )
+                : 0}
+              %
+            </div>
           </div>
         </div>
 
-<div className="bg-white border rounded-2xl p-4 mb-4">
-  <input
-    type="text"
-    placeholder="Search restaurant..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="w-full border p-3 rounded-lg"
-  />
-</div>
-        <div className="bg-white border rounded-2xl overflow-x-auto">
-          <table className="w-full min-w-[700px]">
-            <thead className="bg-gray-100">
+        <div className="mb-6 rounded-2xl border bg-white p-4">
+          <input
+            type="text"
+            placeholder="Search restaurant, slug or plan..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-xl border p-3 outline-none focus:border-[#d8aa48]"
+          />
+        </div>
+
+        <div className="overflow-x-auto rounded-2xl border bg-white">
+          <table className="w-full min-w-[900px]">
+            <thead className="bg-[#111416] text-white">
               <tr>
-                <th className="text-left p-4">Restaurant</th>
-                <th className="text-left p-4">Plan</th>
-                <th className="text-left p-4">Slug</th>
-                <th className="text-left p-4">Created</th>
-                <th className="text-left p-4">Actions</th>
+                <th className="p-4 text-left">Restaurant</th>
+                <th className="p-4 text-left">Plan</th>
+                <th className="p-4 text-left">Subscription</th>
+                <th className="p-4 text-left">Slug</th>
+                <th className="p-4 text-left">Created</th>
+                <th className="p-4 text-left">Actions</th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredRestaurants.map((restaurant) => (
-                <tr key={restaurant.id} className="border-t">
-                  <td className="p-4">{restaurant.name}</td>
-                  <td className="p-4 uppercase">{restaurant.plan || "free"}</td>
-                  <td className="p-4">/s/{restaurant.slug}</td>
-                  <td className="p-4">
-                    {new Date(restaurant.created_at).toLocaleDateString()}
-                  </td>
-                  <td className="p-4">
-  <div className="flex gap-2">
-    <AdminPlanButton
-      restaurantId={restaurant.id}
-      plan="free"
-    />
+              {filteredRestaurants.map((restaurant) => {
+                const plan = (restaurant.plan || "free").toLowerCase();
 
-    <AdminPlanButton
-      restaurantId={restaurant.id}
-      plan="basic"
-    />
+                return (
+                  <tr key={restaurant.id} className="border-t">
+                    <td className="p-4 font-bold">{restaurant.name}</td>
 
-    <AdminPlanButton
-      restaurantId={restaurant.id}
-      plan="pro"
-    />
-    <DeleteRestaurantButton
-  restaurantId={restaurant.id}
-  restaurantName={restaurant.name}
-/>
-  </div>
-</td>
-                </tr>
-              ))}
+                    <td className="p-4">
+                      <span className="rounded-full bg-[#f1e6cf] px-3 py-1 text-xs font-extrabold uppercase text-[#7a5a16]">
+                        {plan}
+                      </span>
+                    </td>
+
+                    <td className="p-4">
+                      {restaurant.paypal_subscription_id ? (
+                        <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                          Active
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-bold text-gray-500">
+                          None
+                        </span>
+                      )}
+                    </td>
+
+                    <td className="p-4 text-gray-600">
+                      /s/{restaurant.slug}
+                    </td>
+
+                    <td className="p-4 text-gray-600">
+                      {new Date(restaurant.created_at).toLocaleDateString()}
+                    </td>
+
+                    <td className="p-4">
+                      <div className="flex flex-wrap gap-2">
+                        <AdminPlanButton
+                          restaurantId={restaurant.id}
+                          plan="free"
+                        />
+
+                        <AdminPlanButton
+                          restaurantId={restaurant.id}
+                          plan="basic"
+                        />
+
+                        <AdminPlanButton
+                          restaurantId={restaurant.id}
+                          plan="pro"
+                        />
+
+                        <DeleteRestaurantButton
+                          restaurantId={restaurant.id}
+                          restaurantName={restaurant.name}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
