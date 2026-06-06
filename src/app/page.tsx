@@ -353,9 +353,17 @@ export default function Home() {
       <h4 className="mb-3 font-bold">Produkt</h4>
 
       <div className="space-y-2 text-sm text-white/60">
-        <p>Funktionen</p>
-        <p>Preise</p>
-        <p>Demo</p>
+        <Link href="/funktionen" className="block hover:text-white transition">
+  Funktionen
+</Link>
+
+<Link href="/preise" className="block hover:text-white transition">
+  Preise
+</Link>
+
+<Link href="/demo" className="block hover:text-white transition">
+  Demo
+</Link>
       </div>
     </div>
 
