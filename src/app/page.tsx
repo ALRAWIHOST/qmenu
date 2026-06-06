@@ -337,49 +337,62 @@ export default function Home() {
       </section>
 
       <footer className="bg-[#111416] px-6 py-12 text-white md:px-8">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
-          <div>
-            <h3 className="mb-3 text-2xl font-extrabold">
-              <span className="text-[#d8aa48]">Q</span>Menu
-            </h3>
-            <p className="text-sm text-white/60">
-              Die einfache und moderne Lösung für digitale Speisekarten mit
-              QR-Code.
-            </p>
-          </div>
+  <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
+    <div>
+      <h3 className="mb-3 text-2xl font-extrabold">
+        <span className="text-[#d8aa48]">Q</span>Menu
+      </h3>
 
-          <div>
-            <h4 className="mb-3 font-bold">Produkt</h4>
-            <div className="space-y-2 text-sm text-white/60">
-              <p>Funktionen</p>
-              <p>Preise</p>
-              <p>Demo</p>
-            </div>
-          </div>
+      <p className="text-sm text-white/60">
+        Die einfache und moderne Lösung für digitale Speisekarten mit
+        QR-Code.
+      </p>
+    </div>
 
-          <div>
-            <h4 className="mb-3 font-bold">Unternehmen</h4>
-            <div className="space-y-2 text-sm text-white/60">
-              <p>Über uns</p>
-              <p>Kontakt</p>
-              <p>Support</p>
-            </div>
-          </div>
+    <div>
+      <h4 className="mb-3 font-bold">Produkt</h4>
 
-          <div>
-            <h4 className="mb-3 font-bold">Rechtliches</h4>
-            <div className="space-y-2 text-sm text-white/60">
-              <p>Datenschutz</p>
-              <p>AGB</p>
-              <p>Impressum</p>
-            </div>
-          </div>
-        </div>
+      <div className="space-y-2 text-sm text-white/60">
+        <p>Funktionen</p>
+        <p>Preise</p>
+        <p>Demo</p>
+      </div>
+    </div>
 
-        <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-center text-sm text-white/50">
-          © 2026 QMenu. Alle Rechte vorbehalten.
-        </div>
-      </footer>
-    </main>
-  );
-}
+    <div>
+      <h4 className="mb-3 font-bold">Unternehmen</h4>
+
+      <div className="space-y-2 text-sm text-white/60">
+        <p>Über uns</p>
+        <p>Kontakt</p>
+        <p>Support</p>
+      </div>
+    </div>
+
+    <div>
+      <h4 className="mb-3 font-bold">Rechtliches</h4>
+
+      <div className="space-y-2 text-sm text-white/60">
+        <Link
+          href="/datenschutz"
+          className="block hover:text-white transition"
+        >
+          Datenschutz
+        </Link>
+
+        <p>AGB</p>
+
+        <Link
+          href="/impressum"
+          className="block hover:text-white transition"
+        >
+          Impressum
+        </Link>
+      </div>
+    </div>
+  </div>
+
+  <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-center text-sm text-white/50">
+    © 2026 QMenu. Alle Rechte vorbehalten.
+  </div>
+</footer>
