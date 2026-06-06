@@ -363,9 +363,26 @@ export default function Home() {
       <h4 className="mb-3 font-bold">Unternehmen</h4>
 
       <div className="space-y-2 text-sm text-white/60">
-        <p>Über uns</p>
-        <p>Kontakt</p>
-        <p>Support</p>
+        <Link
+  href="/uber-uns"
+  className="block hover:text-white transition"
+>
+  Über uns
+</Link>
+
+<Link
+  href="/kontakt"
+  className="block hover:text-white transition"
+>
+  Kontakt
+</Link>
+
+<Link
+  href="/support"
+  className="block hover:text-white transition"
+>
+  Support
+</Link>
       </div>
     </div>
 
