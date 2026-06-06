@@ -4,8 +4,9 @@ const PAYPAL_API_BASE = "https://api-m.sandbox.paypal.com";
 
 async function getPayPalAccessToken() {
   const clientId =
-  process.env.PAYPAL_CLIENT_ID ||
-  process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+    process.env.PAYPAL_CLIENT_ID ||
+    process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+
   const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
@@ -25,12 +26,23 @@ async function getPayPalAccessToken() {
 
   const data = await response.json();
 
+  if (!response.ok) {
+    throw new Error(data.error_description || "PayPal token error");
+  }
+
   return data.access_token;
 }
 
 export async function POST(request: Request) {
   try {
     const { plan, restaurantId } = await request.json();
+
+    if (!plan || !restaurantId) {
+      return NextResponse.json(
+        { error: "Missing plan or restaurantId" },
+        { status: 400 }
+      );
+    }
 
     const amount = plan === "pro" ? "19.00" : "9.00";
     const baseUrl =
@@ -68,17 +80,22 @@ export async function POST(request: Request) {
 
     const data = await response.json();
 
+    if (!response.ok) {
+      throw new Error(data.message || "PayPal order creation failed");
+    }
+
     return NextResponse.json(data);
   } catch (error) {
-  console.error("PayPal create order error:", error);
+    console.error("PayPal create order error:", error);
 
-  return NextResponse.json(
-    {
-      error:
-        error instanceof Error
-          ? error.message
-          : "PayPal order creation failed",
-    },
-    { status: 500 }
-  );
+    return NextResponse.json(
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "PayPal order creation failed",
+      },
+      { status: 500 }
+    );
+  }
 }
