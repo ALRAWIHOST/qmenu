@@ -12,30 +12,42 @@ export default function PayPalCheckoutButton({
   const price = plan === "pro" ? "19€" : "9€";
 
   const handleCheckout = async () => {
-    const response = await fetch("/api/paypal/create-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        plan,
-        restaurantId,
-      }),
-    });
+    try {
+      const response = await fetch("/api/paypal/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          plan,
+          restaurantId,
+        }),
+      });
 
-    const order = await response.json();
+      const order = await response.json();
 
-    const approvalUrl = order.links?.find(
-      (link: { rel: string; href: string }) =>
-        link.rel === "approve"
-    )?.href;
+      if (!response.ok) {
+        alert(order.error || "PayPal API Fehler");
+        console.log("PayPal error:", order);
+        return;
+      }
 
-    if (!approvalUrl) {
-      alert("PayPal Checkout konnte nicht gestartet werden.");
-      return;
+      console.log("PayPal order:", order);
+
+      const approvalUrl = order.links?.find(
+        (link: { rel: string; href: string }) => link.rel === "approve"
+      )?.href;
+
+      if (!approvalUrl) {
+        alert(JSON.stringify(order, null, 2));
+        return;
+      }
+
+      window.location.href = approvalUrl;
+    } catch (error) {
+      console.error(error);
+      alert("PayPal Checkout Fehler. Bitte Console prüfen.");
     }
-
-    window.location.href = approvalUrl;
   };
 
   return (
