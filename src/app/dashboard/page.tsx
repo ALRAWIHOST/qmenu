@@ -318,10 +318,16 @@ export default function DashboardPage() {
                         </p>
 
                         <div className="flex flex-wrap gap-2">
-                          <PayPalCheckoutButton
-                            plan="pro"
-                            restaurantId={restaurant.id}
-                          />
+                          {restaurant.paypal_subscription_id ? (
+  <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-800">
+    Um auf Pro zu wechseln, kündigen Sie zuerst Ihr aktuelles Abo.
+  </p>
+) : (
+  <PayPalCheckoutButton
+    plan="pro"
+    restaurantId={restaurant.id}
+  />
+)}
                         </div>
                       </div>
                     )}
