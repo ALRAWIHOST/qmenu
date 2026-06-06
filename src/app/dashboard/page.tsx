@@ -75,9 +75,7 @@ export default function DashboardPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        restaurantId,
-      }),
+      body: JSON.stringify({ restaurantId }),
     });
 
     const result = await response.json();
@@ -211,8 +209,22 @@ export default function DashboardPage() {
                   <div className="border-b bg-[#111416] p-6 text-white">
                     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                       <div>
-                        <div className="mb-3 inline-flex rounded-full bg-[#d8aa48] px-3 py-1 text-xs font-extrabold uppercase text-black">
-                          {plan}
+                        <div className="mb-3 flex flex-wrap items-center gap-3">
+                          <div className="inline-flex rounded-full bg-[#d8aa48] px-3 py-1 text-xs font-extrabold uppercase text-black">
+                            {plan}
+                          </div>
+
+                          {(plan === "basic" || plan === "pro") &&
+                            restaurant.paypal_subscription_id && (
+                              <button
+                                onClick={() =>
+                                  handleCancelSubscription(restaurant.id)
+                                }
+                                className="rounded-full border border-red-400 px-3 py-1 text-xs font-bold text-red-300 hover:bg-red-500 hover:text-white"
+                              >
+                                Abo kündigen
+                              </button>
+                            )}
                         </div>
 
                         <h2 className="text-2xl font-extrabold">
@@ -310,17 +322,6 @@ export default function DashboardPage() {
                             plan="pro"
                             restaurantId={restaurant.id}
                           />
-
-                          {restaurant.paypal_subscription_id && (
-                            <button
-                              onClick={() =>
-                                handleCancelSubscription(restaurant.id)
-                              }
-                              className="rounded-xl border border-red-500 px-4 py-2 text-sm font-bold text-red-600"
-                            >
-                              Abo kündigen
-                            </button>
-                          )}
                         </div>
                       </div>
                     )}
@@ -335,17 +336,6 @@ export default function DashboardPage() {
                           Alle Premium-Funktionen sind für dieses Restaurant
                           freigeschaltet.
                         </p>
-
-                        {restaurant.paypal_subscription_id && (
-                          <button
-                            onClick={() =>
-                              handleCancelSubscription(restaurant.id)
-                            }
-                            className="mt-4 rounded-xl border border-red-500 px-4 py-2 text-sm font-bold text-red-600"
-                          >
-                            Abo kündigen
-                          </button>
-                        )}
                       </div>
                     )}
                   </div>
