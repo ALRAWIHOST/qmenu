@@ -53,7 +53,7 @@ export default function RegisterPage() {
       return;
     }
 
-    const slug = createSlug(restaurantName);
+    const slug = `${createSlug(restaurantName)}-${Date.now()}`;
 
     const { data: newRestaurant, error: restaurantError } = await supabase
       .from("restaurants")

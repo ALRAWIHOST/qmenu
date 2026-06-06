@@ -72,9 +72,9 @@ export async function POST(request: Request) {
           },
         ],
         application_context: {
-          return_url: `${baseUrl}/payment/success?plan=${plan}&restaurantId=${restaurantId}`,
-          cancel_url: `${baseUrl}/payment/cancel`,
-        },
+  return_url: `${baseUrl}/payment/success?plan=${plan}&restaurantId=${restaurantId}`,
+  cancel_url: `${baseUrl}/payment/cancel`,
+},
       }),
     });
 
