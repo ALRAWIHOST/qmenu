@@ -396,3 +396,6 @@ export default function Home() {
     © 2026 QMenu. Alle Rechte vorbehalten.
   </div>
 </footer>
+    </main>
+  );
+}
