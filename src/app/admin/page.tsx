@@ -226,11 +226,12 @@ export default function AdminPage() {
             <thead className="bg-[#111416] text-white">
               <tr>
                 <th className="p-4 text-left">Restaurant</th>
-                <th className="p-4 text-left">Plan</th>
-                <th className="p-4 text-left">Subscription</th>
-                <th className="p-4 text-left">Slug</th>
-                <th className="p-4 text-left">Created</th>
-                <th className="p-4 text-left">Actions</th>
+<th className="p-4 text-left">Plan</th>
+<th className="p-4 text-left">Subscription</th>
+<th className="p-4 text-left">MRR</th>
+<th className="p-4 text-left">Slug</th>
+<th className="p-4 text-left">Created</th>
+<th className="p-4 text-left">Actions</th>
               </tr>
             </thead>
 
@@ -249,24 +250,40 @@ export default function AdminPage() {
                     </td>
 
                     <td className="p-4">
-                      {restaurant.paypal_subscription_id ? (
-                        <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
-                          Active
-                        </span>
-                      ) : (
-                        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-bold text-gray-500">
-                          None
-                        </span>
-                      )}
-                    </td>
+  {restaurant.paypal_subscription_id ? (
+    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+      Active
+    </span>
+  ) : (
+    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-bold text-gray-500">
+      None
+    </span>
+  )}
+</td>
 
-                    <td className="p-4 text-gray-600">
-                      /s/{restaurant.slug}
-                    </td>
+<td className="p-4">
+  {plan === "pro" ? (
+    <span className="font-extrabold text-emerald-600">
+      19€
+    </span>
+  ) : plan === "basic" ? (
+    <span className="font-extrabold text-blue-600">
+      9€
+    </span>
+  ) : (
+    <span className="font-bold text-gray-400">
+      0€
+    </span>
+  )}
+</td>
 
-                    <td className="p-4 text-gray-600">
-                      {new Date(restaurant.created_at).toLocaleDateString()}
-                    </td>
+<td className="p-4 text-gray-600">
+  /s/{restaurant.slug}
+</td>
+
+<td className="p-4 text-gray-600">
+  {new Date(restaurant.created_at).toLocaleDateString()}
+</td>
 
                     <td className="p-4">
                       <div className="flex flex-wrap gap-2">
