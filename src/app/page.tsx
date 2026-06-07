@@ -6,7 +6,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-[#111416] text-white shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <h1 className="text-3xl font-extrabold tracking-tight">
-            <span className="text-[#d8aa48]">Q</span>Menu
+            <span className="text-[#d8aa48]">QR</span>Menu
           </h1>
 
           <nav className="hidden items-center gap-8 md:flex">
@@ -114,7 +114,7 @@ export default function Home() {
               <div className="relative rounded-[3rem] border bg-white p-4 shadow-2xl">
                 <img
                   src="/landing/phone-preview.png"
-                  alt="QMenu mobile menu preview"
+                  alt="QRMenu mobile menu preview"
                   className="h-[650px] w-[330px] rounded-[2.4rem] object-cover"
                 />
 
@@ -148,7 +148,7 @@ export default function Home() {
           </h2>
 
           <p className="mx-auto mb-12 max-w-2xl text-center text-gray-600">
-            QMenu bietet alle Funktionen, die Sie benötigen, um Ihre
+            QRMenu bietet alle Funktionen, die Sie benötigen, um Ihre
             Speisekarte digital zu verwalten und mit Ihren Gästen zu teilen.
           </p>
 
@@ -193,7 +193,7 @@ export default function Home() {
       <section id="kunden" className="bg-[#fbfaf7] px-6 py-24 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-4 text-center text-4xl font-extrabold">
-            Restaurants lieben QMenu
+            Restaurants lieben QRMenu
           </h2>
 
           <p className="mx-auto mb-12 max-w-2xl text-center text-gray-600">
@@ -340,7 +340,7 @@ export default function Home() {
   <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
     <div>
       <h3 className="mb-3 text-2xl font-extrabold">
-        <span className="text-[#d8aa48]">Q</span>Menu
+        <span className="text-[#d8aa48]">QR</span>Menu
       </h3>
 
       <p className="text-sm text-white/60">
@@ -423,7 +423,7 @@ export default function Home() {
   </div>
 
   <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-center text-sm text-white/50">
-    © 2026 QMenu. Alle Rechte vorbehalten.
+    © 2026 QRMenu. Alle Rechte vorbehalten.
   </div>
 </footer>
     </main>
