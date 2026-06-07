@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QMenu – Digitale Speisekarten mit QR-Code",
+  title: "QRMenu – Digitale Speisekarten mit QR-Code",
   description:
-    "Erstellen Sie professionelle digitale Speisekarten mit QR-Code für Restaurants, Cafés und Food Trucks. Einfach, modern und in wenigen Minuten online.",
+    "QRMenu bietet digitale Speisekarten mit QR-Code für Restaurants, Cafés und Food Trucks. Professionell, modern und in wenigen Minuten online.",
 
   keywords: [
     "Digitale Speisekarte",
@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     "QR Menü",
     "Restaurant Software",
     "Speisekarte Online",
-    "QMenu",
+    "QRMenu",
+    "menu-qrcode.de",
   ],
 
   authors: [
@@ -34,21 +35,22 @@ export const metadata: Metadata = {
     },
   ],
 
-  creator: "QMenu",
-  publisher: "QMenu",
+  creator: "QRMenu",
+  publisher: "QRMenu",
 
   openGraph: {
-    title: "QMenu – Digitale Speisekarten mit QR-Code",
+    title: "QRMenu – Digitale Speisekarten mit QR-Code",
     description:
       "Digitale Speisekarten für Restaurants, Cafés und Food Trucks mit QR-Code, Branding und Statistiken.",
     type: "website",
     locale: "de_DE",
-    siteName: "QMenu",
+    siteName: "QRMenu",
+    url: "https://menu-qrcode.de",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "QMenu – Digitale Speisekarten mit QR-Code",
+    title: "QRMenu – Digitale Speisekarten mit QR-Code",
     description:
       "Professionelle digitale Speisekarten für moderne Restaurants.",
   },
@@ -69,9 +71,7 @@ export default function RootLayout({
       lang="de"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
