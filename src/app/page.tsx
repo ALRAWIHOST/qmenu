@@ -5,9 +5,11 @@ export default function Home() {
     <main className="min-h-screen bg-[#fbfaf7] text-[#151515]">
       <header className="sticky top-0 z-50 bg-[#111416] text-white shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <h1 className="text-3xl font-extrabold tracking-tight">
-            <span className="text-[#d8aa48]">QR</span>Menu
-          </h1>
+          <img
+  src="/qrmenu-logo.png"
+  alt="QRMenu"
+  className="h-12 w-auto"
+ />
 
           <nav className="hidden items-center gap-8 md:flex">
             <a href="#features" className="text-sm font-medium text-white/80 hover:text-white">
@@ -340,7 +342,11 @@ export default function Home() {
   <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
     <div>
       <h3 className="mb-3 text-2xl font-extrabold">
-        <span className="text-[#d8aa48]">QR</span>Menu
+        <img
+  src="/qrmenu-logo.png"
+  alt="QRMenu"
+  className="h-10 w-auto"
+/>
       </h3>
 
       <p className="text-sm text-white/60">
