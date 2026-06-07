@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   description:
     "QRMenu bietet digitale Speisekarten mit QR-Code für Restaurants, Cafés und Food Trucks. Professionell, modern und in wenigen Minuten online.",
 
+  icons: {
+    icon: "/favicon.ico",
+  },
+
   keywords: [
     "Digitale Speisekarte",
     "QR Code Menü",
