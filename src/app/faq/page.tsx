@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "FAQ | QRMenu",
+  description:
+    "Antworten auf häufig gestellte Fragen zu digitalen Speisekarten, QR-Codes, Abonnements und QRMenu.",
+};
 
 export default function FAQPage() {
   const faqs = [
