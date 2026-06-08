@@ -18,8 +18,23 @@ export const metadata: Metadata = {
   description:
     "QRMenu bietet digitale Speisekarten mit QR-Code für Restaurants, Cafés und Food Trucks. Professionell, modern und in wenigen Minuten online.",
 
+  applicationName: "QRMenu",
+
+  appleWebApp: {
+    capable: true,
+    title: "QRMenu",
+    statusBarStyle: "black-translucent",
+  },
+
+  formatDetection: {
+    telephone: false,
+  },
+
+  themeColor: "#d8aa48",
+
   icons: {
     icon: "/favicon.ico",
+    apple: "/icons/icon-192.png",
   },
 
   keywords: [
