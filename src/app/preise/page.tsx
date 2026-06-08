@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Preise | QRMenu",
+  description:
+    "Entdecken Sie die Free-, Basic- und Pro-Pläne von QRMenu für digitale Speisekarten mit QR-Code.",
+};
 
 export default function PreisePage() {
   return (
