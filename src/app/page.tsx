@@ -370,6 +370,9 @@ export default function Home() {
 <Link href="/demo" className="block hover:text-white transition">
   Demo
 </Link>
+<Link href="/faq" className="block hover:text-white transition">
+  FAQ
+</Link>
       </div>
     </div>
 
