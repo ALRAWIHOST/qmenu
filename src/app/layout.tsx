@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import ServiceWorkerRegister from "./ServiceWorkerRegister";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -105,6 +106,8 @@ export default function RootLayout({
             gtag('config', 'G-3MRZE0N0SN');
           `}
         </Script>
+
+        <ServiceWorkerRegister />
 
         {children}
       </body>
