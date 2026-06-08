@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Funktionen | QRMenu",
+  description:
+    "Alle Funktionen von QRMenu: digitale Speisekarte, QR-Code, Logo, Cover-Bild, Social Links, Statistiken und einfache Verwaltung.",
+};
 
 export default function FunktionenPage() {
   return (
@@ -6,7 +13,7 @@ export default function FunktionenPage() {
       <section className="bg-[#111416] px-6 py-20 text-white">
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-6 inline-flex rounded-full bg-[#f1e6cf] px-4 py-2 text-sm font-medium text-[#7a5a16]">
-            QMenu Funktionen
+            QRMenu Funktionen
           </div>
 
           <h1 className="text-5xl font-extrabold md:text-6xl">
@@ -43,9 +50,7 @@ export default function FunktionenPage() {
                 ⌁
               </div>
 
-              <h2 className="mb-3 text-xl font-extrabold">
-                QR-Code
-              </h2>
+              <h2 className="mb-3 text-xl font-extrabold">QR-Code</h2>
 
               <p className="text-gray-600">
                 Teilen Sie Ihre Speisekarte einfach per QR-Code mit Ihren
@@ -58,9 +63,7 @@ export default function FunktionenPage() {
                 ◉
               </div>
 
-              <h2 className="mb-3 text-xl font-extrabold">
-                Branding
-              </h2>
+              <h2 className="mb-3 text-xl font-extrabold">Branding</h2>
 
               <p className="text-gray-600">
                 Logo, Cover-Bild, Öffnungszeiten und Social Links für einen
@@ -73,9 +76,7 @@ export default function FunktionenPage() {
                 ↗
               </div>
 
-              <h2 className="mb-3 text-xl font-extrabold">
-                Statistiken
-              </h2>
+              <h2 className="mb-3 text-xl font-extrabold">Statistiken</h2>
 
               <p className="text-gray-600">
                 Sehen Sie Menü-Aufrufe und QR-Scans direkt in Ihrem Dashboard.
@@ -101,9 +102,7 @@ export default function FunktionenPage() {
                 24
               </div>
 
-              <h2 className="mb-3 text-xl font-extrabold">
-                Immer online
-              </h2>
+              <h2 className="mb-3 text-xl font-extrabold">Immer online</h2>
 
               <p className="text-gray-600">
                 Ihre digitale Speisekarte ist jederzeit erreichbar, ohne App.
@@ -117,7 +116,7 @@ export default function FunktionenPage() {
             </h2>
 
             <p className="mx-auto mb-8 max-w-2xl text-white/70">
-              Starten Sie kostenlos und testen Sie QMenu direkt in Ihrem
+              Starten Sie kostenlos und testen Sie QRMenu direkt in Ihrem
               Restaurant.
             </p>
 
