@@ -34,7 +34,7 @@ export default function LoginPage() {
       <div className="relative mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 py-12 lg:grid-cols-2">
         <div className="hidden lg:block">
           <Link href="/" className="mb-10 inline-block text-3xl font-extrabold">
-            <span className="text-[#d8aa48]">Q</span>Menu
+            <span className="text-[#d8aa48]">QR</span>Menu
           </Link>
 
           <h1 className="mb-6 text-5xl font-extrabold leading-tight">
@@ -42,7 +42,7 @@ export default function LoginPage() {
             <br />
             zurück bei
             <br />
-            QMenu.
+            QRMenu.
           </h1>
 
           <p className="max-w-lg text-lg leading-8 text-white/70">
@@ -57,12 +57,16 @@ export default function LoginPage() {
             </div>
 
             <div className="border-l border-white/10 p-5">
-              <div className="text-2xl font-extrabold text-[#d8aa48]">24/7</div>
+              <div className="text-2xl font-extrabold text-[#d8aa48]">
+                24/7
+              </div>
               <div className="text-sm text-white/60">Online</div>
             </div>
 
             <div className="border-l border-white/10 p-5">
-              <div className="text-2xl font-extrabold text-[#d8aa48]">Live</div>
+              <div className="text-2xl font-extrabold text-[#d8aa48]">
+                Live
+              </div>
               <div className="text-sm text-white/60">Stats</div>
             </div>
           </div>
@@ -71,14 +75,14 @@ export default function LoginPage() {
         <div className="mx-auto w-full max-w-md">
           <div className="mb-8 text-center lg:hidden">
             <Link href="/" className="text-3xl font-extrabold">
-              <span className="text-[#d8aa48]">Q</span>Menu
+              <span className="text-[#d8aa48]">QR</span>Menu
             </Link>
           </div>
 
           <div className="rounded-[2rem] border border-white/10 bg-white p-8 text-gray-950 shadow-2xl">
             <div className="mb-6 text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#d8aa48] text-2xl font-extrabold text-black">
-                Q
+                QR
               </div>
 
               <h1 className="text-3xl font-extrabold">Login</h1>
@@ -101,8 +105,17 @@ export default function LoginPage() {
               placeholder="Passwort"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mb-5 w-full rounded-xl border p-4 outline-none focus:border-[#d8aa48]"
+              className="mb-3 w-full rounded-xl border p-4 outline-none focus:border-[#d8aa48]"
             />
+
+            <div className="mb-5 text-right">
+              <Link
+                href="/forgot-password"
+                className="text-sm font-semibold text-gray-500 hover:text-black"
+              >
+                Passwort vergessen?
+              </Link>
+            </div>
 
             <button
               onClick={handleLogin}
