@@ -27,7 +27,7 @@ export default function UpdatePasswordPage() {
     }
 
     alert("Passwort wurde erfolgreich geändert.");
-    window.location.href = "/admin/login";
+    window.location.href = "/login";
   };
 
   return (
