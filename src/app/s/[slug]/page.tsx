@@ -68,8 +68,8 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
           )}
 
           <div className="mb-3 text-[#d8aa48] text-sm font-bold tracking-wide">
-  Digitale Speisekarte
-</div>
+            Digitale Speisekarte
+          </div>
 
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight break-words">
             {restaurant.name}
@@ -171,15 +171,11 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
 
       {featuredProducts.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 md:px-6 py-10">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-bold text-[#9a6b16]">
-                Empfehlung des Chefs
-              </p>
-              <h2 className="text-3xl font-extrabold">
-                Beliebte Gerichte
-              </h2>
-            </div>
+          <div className="mb-5">
+            <p className="text-sm font-bold text-[#9a6b16]">
+              Empfehlung des Chefs
+            </p>
+            <h2 className="text-3xl font-extrabold">Beliebte Gerichte</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
@@ -207,7 +203,7 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
                 )}
 
                 <p className="mt-3 inline-block rounded-full bg-[#f1e6cf] px-3 py-1 text-sm font-bold text-[#7a5a16]">
-                  {product.price}€
+                  {Number(product.price).toFixed(2)} €
                 </p>
               </div>
             ))}
@@ -263,75 +259,45 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
                 </h3>
 
                 <div className="grid gap-6 md:grid-cols-2">
-  {categoryProducts.map((product) => (
-    <div
-      key={product.id}
-      className="overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-    >
-      {product.image_url ? (
-        <img
-          src={product.image_url}
-          alt={product.name}
-          className="h-56 w-full object-cover"
-        />
-      ) : (
-        <div className="flex h-56 items-center justify-center bg-[#f1e6cf] text-5xl">
-          🍽️
-        </div>
-      )}
-
-      <div className="p-5">
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <h4 className="text-lg font-extrabold leading-tight break-words">
-            {product.name}
-          </h4>
-
-          <span className="rounded-full bg-[#f1e6cf] px-4 py-1.5 text-sm font-bold text-[#7a5a16]">
-            {Number(product.price).toFixed(2)} €
-          </span>
-        </div>
-
-        {product.description && (
-          <p className="text-sm leading-6 text-gray-500">
-            {product.description}
-          </p>
-        )}
-
-        {product.is_available === false && (
-          <div className="mt-4 inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
-            Nicht verfügbar
-          </div>
-        )}
-      </div>
-    </div>
-  ))}
-</div>
+                  {categoryProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                    >
                       {product.image_url ? (
                         <img
                           src={product.image_url}
                           alt={product.name}
-                          className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl object-cover"
+                          className="h-56 w-full object-cover"
                         />
                       ) : (
-                        <div className="h-24 w-24 md:h-28 md:w-28 shrink-0 rounded-2xl bg-gray-100" />
+                        <div className="flex h-56 items-center justify-center bg-[#f1e6cf] text-5xl">
+                          🍽️
+                        </div>
                       )}
 
-                      <div className="flex min-w-0 flex-1 flex-col gap-2">
-                        <div className="min-w-0">
-                          <h4 className="text-base md:text-lg font-extrabold break-words">
+                      <div className="p-5">
+                        <div className="mb-4 flex items-start justify-between gap-4">
+                          <h4 className="text-lg font-extrabold leading-tight break-words">
                             {product.name}
                           </h4>
 
-                          {product.description && (
-                            <p className="mt-1 text-sm text-gray-500 break-words">
-                              {product.description}
-                            </p>
-                          )}
+                          <span className="rounded-full bg-[#f1e6cf] px-4 py-1.5 text-sm font-bold text-[#7a5a16]">
+                            {Number(product.price).toFixed(2)} €
+                          </span>
                         </div>
 
-                        <span className="self-start whitespace-nowrap rounded-full bg-[#f1e6cf] px-3 py-1 text-sm font-bold text-[#7a5a16]">
-                          {product.price}€
-                        </span>
+                        {product.description && (
+                          <p className="text-sm leading-6 text-gray-500">
+                            {product.description}
+                          </p>
+                        )}
+
+                        {product.is_available === false && (
+                          <div className="mt-4 inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
+                            Nicht verfügbar
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -345,7 +311,7 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
       <section className="max-w-5xl mx-auto px-4 md:px-6 pb-12">
         <div className="rounded-3xl bg-[#111416] p-8 text-center text-white">
           <h2 className="text-2xl font-extrabold mb-3">
-            Powered by QMenu
+            Powered by QRMenu
           </h2>
           <p className="text-white/70">
             Digitale Speisekarten mit QR-Code für moderne Restaurants.
