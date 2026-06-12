@@ -68,8 +68,8 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
           )}
 
           <div className="mb-3 text-[#d8aa48] text-sm font-bold tracking-wide">
-            ★★★★★ 4.9 Bewertung
-          </div>
+  Digitale Speisekarte
+</div>
 
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight break-words">
             {restaurant.name}
@@ -262,12 +262,50 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
                   {category.name}
                 </h3>
 
-                <div className="space-y-4">
-                  {categoryProducts.map((product) => (
-                    <div
-                      key={product.id}
-                      className="group flex gap-3 rounded-3xl border bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-                    >
+                <div className="grid gap-6 md:grid-cols-2">
+  {categoryProducts.map((product) => (
+    <div
+      key={product.id}
+      className="overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+    >
+      {product.image_url ? (
+        <img
+          src={product.image_url}
+          alt={product.name}
+          className="h-56 w-full object-cover"
+        />
+      ) : (
+        <div className="flex h-56 items-center justify-center bg-[#f1e6cf] text-5xl">
+          🍽️
+        </div>
+      )}
+
+      <div className="p-5">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <h4 className="text-lg font-extrabold leading-tight break-words">
+            {product.name}
+          </h4>
+
+          <span className="rounded-full bg-[#f1e6cf] px-4 py-1.5 text-sm font-bold text-[#7a5a16]">
+            {Number(product.price).toFixed(2)} €
+          </span>
+        </div>
+
+        {product.description && (
+          <p className="text-sm leading-6 text-gray-500">
+            {product.description}
+          </p>
+        )}
+
+        {product.is_available === false && (
+          <div className="mt-4 inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
+            Nicht verfügbar
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
                       {product.image_url ? (
                         <img
                           src={product.image_url}
