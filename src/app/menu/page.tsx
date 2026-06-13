@@ -9,6 +9,7 @@ import RestaurantBrandingForm from "./RestaurantBrandingForm";
 import OpeningHoursForm from "./OpeningHoursForm";
 import SocialLinksForm from "./SocialLinksForm";
 import MoveCategoryButtons from "./MoveCategoryButtons";
+import ProductsManager from "./ProductsManager";
 
 type MenuPageProps = {
   searchParams: Promise<{
@@ -125,19 +126,11 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
             </ul>
           </div>
 
-          <div className="bg-white border rounded-2xl p-6">
-            <h2 className="text-2xl font-semibold mb-4">
-              Produkte
-            </h2>
-
-            <AddProductForm
-              restaurantId={restaurant.id}
-              categories={categories || []}
-            />
-
-            <ul className="space-y-3">
-              {products?.map((product) => (
-                <li key={product.id} className="border p-3 rounded-lg">
+          <ProductsManager
+  restaurantId={restaurant.id}
+  categories={categories || []}
+  products={products || []}
+/>
                   <div className="flex justify-between">
                     <div>
                       <h3 className="font-semibold">
