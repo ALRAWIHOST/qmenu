@@ -86,91 +86,53 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
     tiktok_url: restaurant.tiktok_url,
   }}
 />
-        <RestaurantBrandingForm
+
+<RestaurantBrandingForm
   restaurantId={restaurant.id}
   currentLogoUrl={restaurant.logo_url || ""}
   currentCoverUrl={restaurant.cover_url || ""}
 />
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white border rounded-2xl p-6">
-            <h2 className="text-2xl font-semibold mb-4">
-              Kategorien
-            </h2>
+<div className="grid md:grid-cols-2 gap-8">
+  <div className="bg-white border rounded-2xl p-6">
+    <h2 className="text-2xl font-semibold mb-4">
+      Kategorien
+    </h2>
 
-            <AddCategoryForm restaurantId={restaurant.id} />
+    <AddCategoryForm restaurantId={restaurant.id} />
 
-            <ul className="space-y-2">
-              {categories?.map((category) => (
-                <li
-                  key={category.id}
-                  className="border p-3 rounded-lg flex justify-between items-center"
-                >
-                  <span>{category.name}</span>
+    <ul className="space-y-2">
+      {categories?.map((category) => (
+        <li
+          key={category.id}
+          className="border p-3 rounded-lg flex justify-between items-center"
+        >
+          <span>{category.name}</span>
 
-                  <div className="flex gap-2">
-  <MoveCategoryButtons
-    category={category}
+          <div className="flex gap-2">
+            <MoveCategoryButtons
+              category={category}
+              categories={categories || []}
+            />
+
+            <EditCategoryForm
+              categoryId={category.id}
+              currentName={category.name}
+            />
+
+            <DeleteCategoryButton categoryId={category.id} />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <ProductsManager
+    restaurantId={restaurant.id}
     categories={categories || []}
+    products={products || []}
   />
-
-  <EditCategoryForm
-    categoryId={category.id}
-    currentName={category.name}
-  />
-
-  <DeleteCategoryButton categoryId={category.id} />
 </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <ProductsManager
-  restaurantId={restaurant.id}
-  categories={categories || []}
-  products={products || []}
-/>
-                  <div className="flex justify-between">
-                    <div>
-                      <h3 className="font-semibold">
-                        {product.name}
-                      </h3>
-
-                      <p className="text-sm text-gray-500">
-                        {product.categories?.name || "Ohne Kategorie"}
-                      </p>
-
-                      {product.description && (
-                        <p className="text-sm text-gray-600 mt-1">
-                          {product.description}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="font-bold">
-                        {product.price}€
-                      </span>
-
-                      <div className="flex gap-2">
-                        <EditProductForm
-                          productId={product.id}
-                          currentName={product.name}
-                          currentPrice={product.price}
-                          currentDescription={product.description || ""}
-                        />
-
-                        <DeleteProductButton productId={product.id} />
-                      </div>
-                    </div>
-                  </div>
-                </li>
-            
-            </ul>
-          </div>
-        </div>
-      </div>
     </main>
   );
 }
