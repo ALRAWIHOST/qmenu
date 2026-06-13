@@ -8,6 +8,7 @@ import EditCategoryForm from "./EditCategoryForm";
 import RestaurantBrandingForm from "./RestaurantBrandingForm";
 import OpeningHoursForm from "./OpeningHoursForm";
 import SocialLinksForm from "./SocialLinksForm";
+import MoveCategoryButtons from "./MoveCategoryButtons";
 
 type MenuPageProps = {
   searchParams: Promise<{
@@ -25,10 +26,11 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
     .single();
 
   const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("restaurant_id", restaurant?.id || "")
-    .order("created_at", { ascending: false });
+  .from("categories")
+  .select("*")
+  .eq("restaurant_id", restaurant?.id || "")
+  .order("sort_order", { ascending: true })
+  .order("created_at", { ascending: true });
 
   const { data: products } = await supabase
     .from("products")
@@ -106,13 +108,18 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
                   <span>{category.name}</span>
 
                   <div className="flex gap-2">
-                    <EditCategoryForm
-                      categoryId={category.id}
-                      currentName={category.name}
-                    />
+  <MoveCategoryButtons
+    category={category}
+    categories={categories || []}
+  />
 
-                    <DeleteCategoryButton categoryId={category.id} />
-                  </div>
+  <EditCategoryForm
+    categoryId={category.id}
+    currentName={category.name}
+  />
+
+  <DeleteCategoryButton categoryId={category.id} />
+</div>
                 </li>
               ))}
             </ul>
