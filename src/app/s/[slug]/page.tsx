@@ -28,10 +28,11 @@ export default async function PublicMenuPage({ params }: PublicMenuPageProps) {
   });
 
   const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("restaurant_id", restaurant.id)
-    .order("created_at", { ascending: true });
+  .from("categories")
+  .select("*")
+  .eq("restaurant_id", restaurant.id)
+  .order("sort_order", { ascending: true })
+  .order("created_at", { ascending: true });
 
   const { data: products } = await supabase
     .from("products")
