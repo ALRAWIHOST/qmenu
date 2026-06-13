@@ -133,6 +133,8 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
     products={products || []}
   />
 </div>
+
+      </div>
     </main>
   );
 }
