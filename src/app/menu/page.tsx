@@ -165,9 +165,7 @@ export default async function MenuPage({ searchParams }: MenuPageProps) {
                       </div>
                     </div>
                   </div>
-                </li>
-            
-            </ul>
+                
           </div>
         </div>
       </div>
