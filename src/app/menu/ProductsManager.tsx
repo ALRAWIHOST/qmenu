@@ -16,6 +16,7 @@ type Product = {
   price: number;
   description?: string | null;
   category_id?: string | null;
+  image_url?: string | null;
   categories?: {
     name: string;
   } | null;
