@@ -17,17 +17,23 @@ export default function MoveCategoryButtons({
   categories,
 }: MoveCategoryButtonsProps) {
   const moveCategory = async (direction: "up" | "down") => {
-    const currentIndex = categories.findIndex((item) => item.id === category.id);
+    const sortedCategories = [...categories].sort(
+      (a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)
+    );
+
+    const currentIndex = sortedCategories.findIndex(
+      (item) => item.id === category.id
+    );
 
     if (currentIndex === -1) return;
 
     const targetIndex =
       direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
-    if (targetIndex < 0 || targetIndex >= categories.length) return;
+    if (targetIndex < 0 || targetIndex >= sortedCategories.length) return;
 
-    const currentCategory = categories[currentIndex];
-    const targetCategory = categories[targetIndex];
+    const currentCategory = sortedCategories[currentIndex];
+    const targetCategory = sortedCategories[targetIndex];
 
     const currentOrder = currentCategory.sort_order ?? currentIndex;
     const targetOrder = targetCategory.sort_order ?? targetIndex;
@@ -58,6 +64,7 @@ export default function MoveCategoryButtons({
   return (
     <div className="flex gap-1">
       <button
+        type="button"
         onClick={() => moveCategory("up")}
         className="rounded-lg border px-2 py-1 text-sm hover:bg-gray-100"
       >
@@ -65,6 +72,7 @@ export default function MoveCategoryButtons({
       </button>
 
       <button
+        type="button"
         onClick={() => moveCategory("down")}
         className="rounded-lg border px-2 py-1 text-sm hover:bg-gray-100"
       >
