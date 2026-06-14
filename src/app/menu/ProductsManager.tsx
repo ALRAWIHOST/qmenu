@@ -104,6 +104,7 @@ export default function ProductsManager({
                       currentName={product.name}
                       currentPrice={product.price}
                       currentDescription={product.description || ""}
+                      currentImageUrl={product.image_url || ""}
                     />
 
                     <DeleteProductButton productId={product.id} />
